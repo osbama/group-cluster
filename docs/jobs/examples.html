@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job script examples &#8212; OBM Group Cluster  documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SLURM Workload Manager" href="slurm_parameter.html" />
+    <link rel="prev" title="Batch system" href="batch.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default ">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          OBM Clusters</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html#get-an-account">Get an account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html#connect-to-our-workstations">Connect to our workstations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html#on-nodes-and-files">On nodes and files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html#run-a-program">Run a program</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/guidelines.html">Guidelines for use of computer equipment at the METU Physics department</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#definitions">Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#application">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#good-faith">Good Faith</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#data-safety">Data Safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#respect-for-other-users-privacy">Respect for Other Users Privacy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#proper-use">Proper Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#awareness-of-the-purposes-for-use-of-resources">Awareness of the Purposes for Use of Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#rights">Rights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#liability">Liability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#surveillance">Surveillance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#sanctions">Sanctions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#complaints">Complaints</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../resources/workstations.html">Workstations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../resources/workstations.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../resources/workstations.html#individual-workstation-information">Individual Workstation information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/SBCs.html">Single Board Computers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../resources/SBCs.html#overview">Overview</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Account</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../account/account.html">Getting an account</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../account/account.html#getting-started-on-the-machine-account-quota-password">Getting started on the machine (account, quota, password)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../account/account.html#how-to-get-an-account-and-a-cpu-quota">How to get an account and a CPU quota</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../account/login.html">Logging in for the first time</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../account/login.html#log-in-with-ssh">Log in with SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../account/login.html#obtain-a-new-password">Obtain a new password</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../account/accounting.html">Quotas</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jobs</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dos_and_donts.html">Dos and don’ts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch.html">Batch system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="batch.html#creating-a-job-script">Creating a job script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch.html#how-to-pass-command-line-parameters-to-the-job-script">How to pass command-line parameters to the job script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch.html#walltime">Walltime</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Job script examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-examples">Basic examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#openmp-and-mpi">OpenMP and MPI</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="slurm_parameter.html">SLURM Workload Manager</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="slurm_parameter.html#slurm-parameter">SLURM Parameter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slurm_parameter.html#differences-between-cpus-and-tasks">Differences between CPUs and tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slurm_parameter.html#settings-for-openmp-and-mpi-jobs">Settings for OpenMP and MPI jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slurm_parameter.html#job-related-environment-variables">Job related environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slurm_parameter.html#partitions-queues-and-services">Partitions (queues) and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slurm_parameter.html#general-job-limitations">General job limitations</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="interactive.html">Interactive jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive.html#starting-an-interacitve-job">Starting an interacitve job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive.html#keeping-interactive-jobs-alive">Keeping interactive jobs alive</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="job_management.html">Managing jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="job_management.html#job-status-descriptions-in-squeue">Job status descriptions in squeue</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring.html">Monitoring your jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring.html#slurm-commands">SLURM commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring.html#cpu-load-and-memory-consumption-of-your-job">CPU load and memory consumption of your job</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="running_mpi_jobs.html">Running MPI jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running_mpi_jobs.html#intel-mpi">Intel MPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_mpi_jobs.html#openmpi">OpenMPI</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Software</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software/applications.html">Which software is installed on our cluster</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software/applications.html#changes-in-application-software">Changes in application software</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../software/applications.html#missing-or-new-software">Missing or new software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software/applications.html#conda">Conda</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../software/modules.html">Software Module Scheme</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#which-modules-are-currently-loaded">Which modules are currently loaded?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#which-modules-are-available">Which modules are available?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#how-to-load-a-module">How to load a module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#how-to-unload-a-module">How to unload a module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#which-version-of-a-module-is-the-default">Which version of a module is the default?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#how-do-i-switch-to-a-different-version-of-a-module">How do I switch to a different version of a module?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../software/python_r_perl.html">Python, R, Matlab and Perl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software/python_r_perl.html#python">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/python_r_perl.html#matlab">MATLAB</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/linux.html">Linux command line</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/linux.html#new-on-linux-systems">New on Linux systems?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../help/AboutLicenses.html">General comments about licenses</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../applications/sw_guides.html">Application guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../applications/VASP/VASP.html">VASP (Vienna Ab initio Simulation Package)</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Storage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../storage/storage.html">Storage and backup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#available-file-system">Available file system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#home-area">Home area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#work-scratch-areas">Work/scratch areas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#closing-of-user-account">Closing of user account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#privacy-of-user-data">Privacy of user data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#management-of-many-small-files-10000">Management of many small files (&gt; 10000)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#compression-of-data">Compression of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#binary-data-and-endianness">Binary data and endianness</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../storage/file_transfer.html">Transferring files to/from our group cluster</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../storage/file_transfer.html#carbon-head-node-and-home-directories">Carbon (Head node and home directories)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/file_transfer.html#mistake-not-nas-server">Mistake Not… (NAS server)</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Code development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/compilers.html">Compilers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development/compilers.html#usage-of-the-intel-ifort-compiler">Usage of the Intel ifort compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/compilers.html#usage-of-the-intel-c-c-compilers">Usage of the Intel C/C++ compilers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/compilers.html#usage-of-the-nvidia-pgi-compilers">Usage of the NVIDIA (PGI) compilers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development/environment.html">Environment modules</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="job-script-examples">
+<span id="id1"></span><h1>Job script examples<a class="headerlink" href="#job-script-examples" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-examples">
+<h2>Basic examples<a class="headerlink" href="#basic-examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="general-blueprint-for-a-jobscript">
+<h3>General blueprint for a jobscript<a class="headerlink" href="#general-blueprint-for-a-jobscript" title="Permalink to this headline">¶</a></h3>
+<p>You can save the following example to a file (e.g. run.sh) on our group cluster. Comment
+the two <code class="docutils literal notranslate"><span class="pre">cp</span></code> commands that are just for illustratory purpose (lines 46 and 55)
+and change the SBATCH directives where applicable. You can then run the script
+by typing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sbatch run.sh
+</pre></div>
+</div>
+<p>Please note that all values that you define with SBATCH directives are hard
+values. When you, for example, ask for 6000 MB of memory (<code class="docutils literal notranslate"><span class="pre">--mem=6000MB</span></code>) and
+your job uses more than that, the job will be automatically killed by the manager.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
+
+<span class="c1">##############################</span>
+<span class="c1">#       Job blueprint        #</span>
+<span class="c1">##############################</span>
+
+<span class="c1"># Give your job a name, so you can recognize it in the queue overview</span>
+<span class="c1">#SBATCH --job-name=example</span>
+
+<span class="c1"># Define, the workstation you would like to work with. Here we are selecting triumphant-coal</span>
+<span class="c1">#SBATCH --partition=triumphant-coal</span>
+<span class="c1"># You can further define the number of tasks with --ntasks-per-*</span>
+<span class="c1"># See &quot;man sbatch&quot; for details. e.g. --ntasks=4 will ask for 4 cpus.</span>
+
+<span class="c1"># Define, how long the job will run in real time. This is a hard cap meaning</span>
+<span class="c1"># that if the job runs longer than what is written here, it will be</span>
+<span class="c1"># force-stopped by the server. If you make the expected time too long, it will</span>
+<span class="c1"># take longer for the job to start. Here, we say the job will take 5 minutes.</span>
+<span class="c1">#              d-hh:mm:ss</span>
+<span class="c1">#SBATCH --time=0-00:05:00</span>
+
+<span class="c1"># How much memory you need.</span>
+<span class="c1"># --mem will define memory per node and</span>
+<span class="c1"># --mem-per-cpu will define memory per CPU/core. Choose one of those.</span>
+<span class="c1">#SBATCH --mem-per-cpu=1500MB</span>
+<span class="c1">##SBATCH --mem=5GB    # this one is not in effect, due to the double hash</span>
+
+<span class="c1"># Turn on mail notification. There are many possible self-explaining values:</span>
+<span class="c1"># NONE, BEGIN, END, FAIL, ALL (including all aforementioned)</span>
+<span class="c1"># For more values, check &quot;man sbatch&quot;</span>
+<span class="c1">#SBATCH --mail-type=END,FAIL</span>
+
+<span class="c1"># You may not place any commands before the last SBATCH directive</span>
+
+<span class="c1"># Define and create a unique scratch directory for this job</span>
+<span class="nv">SCRATCH_DIRECTORY</span><span class="o">=</span>/scratch/<span class="si">${</span><span class="nv">USER</span><span class="si">}</span>/<span class="si">${</span><span class="nv">SLURM_JOBID</span><span class="si">}</span>.<span class="k">$(</span> date +<span class="s2">&quot;%d%m%y-%H%M&quot;</span> <span class="k">)</span>
+
+mkdir -p <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+
+<span class="c1"># You can copy everything you need to the scratch directory</span>
+<span class="c1"># ${SLURM_SUBMIT_DIR} points to the path where this script was submitted from</span>
+cp <span class="si">${</span><span class="nv">SLURM_SUBMIT_DIR</span><span class="si">}</span>/myfiles*.txt <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+
+<span class="c1"># This is where the actual work is done. In this case, the script only waits.</span>
+<span class="c1"># The time command is optional, but it may give you a hint on how long the</span>
+<span class="c1"># command worked</span>
+<span class="nb">time</span> sleep <span class="m">10</span>
+<span class="c1">#sleep 10</span>
+
+<span class="c1"># After the job is done we copy our output back to $SLURM_SUBMIT_DIR</span>
+cp <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>/my_output <span class="si">${</span><span class="nv">SLURM_SUBMIT_DIR</span><span class="si">}</span>
+
+<span class="c1"># In addition to the copied files, you will also find a file called</span>
+<span class="c1"># slurm-1234.out in the submit directory. This file will contain all output that</span>
+<span class="c1"># was produced during runtime, i.e. stdout and stderr.</span>
+
+<span class="c1"># After everything is saved to the home directory, delete the work directory to</span>
+<span class="c1"># save space on /global/work</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">SLURM_SUBMIT_DIR</span><span class="si">}</span>
+rm -rf <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+
+<span class="c1"># Finish the script</span>
+<span class="nb">exit</span> <span class="m">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-many-sequential-jobs-in-parallel-using-job-arrays">
+<span id="job-arrays"></span><h3>Running many sequential jobs in parallel using job arrays<a class="headerlink" href="#running-many-sequential-jobs-in-parallel-using-job-arrays" title="Permalink to this headline">¶</a></h3>
+<p>In this example we wish to run many similar sequential jobs in parallel using job arrays.
+We take Python as an example but this does not matter for the job arrays:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;start at &#39;</span> <span class="o">+</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%H:%M:%S&#39;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sleep for 10 seconds ...&#39;</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;stop at &#39;</span> <span class="o">+</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%H:%M:%S&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Save this to a file called “test.py” and try it out:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python test.py
+
+start at 15:23:48
+sleep for 10 seconds ...
+stop at 15:23:58
+</pre></div>
+</div>
+<p>Good. Now we would like to run this script 16 times at the same time.
+For this we use the following script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
+
+<span class="c1">#####################</span>
+<span class="c1"># job-array example #</span>
+<span class="c1">#####################</span>
+
+<span class="c1">#SBATCH --job-name=example</span>
+
+<span class="c1"># 16 jobs will run in this array at the same time</span>
+<span class="c1">#SBATCH --array=1-16</span>
+
+<span class="c1"># run for five minutes</span>
+<span class="c1">#              d-hh:mm:ss</span>
+<span class="c1">#SBATCH --time=0-00:05:00</span>
+
+<span class="c1"># 500MB memory per core</span>
+<span class="c1"># this is a hard limit</span>
+<span class="c1">#SBATCH --mem-per-cpu=500MB</span>
+
+<span class="c1"># you may not place bash commands before the last SBATCH directive</span>
+
+<span class="c1"># define and create a unique scratch directory</span>
+<span class="nv">SCRATCH_DIRECTORY</span><span class="o">=</span>/scratch/<span class="si">${</span><span class="nv">USER</span><span class="si">}</span>/job-array-example/<span class="si">${</span><span class="nv">SLURM_JOBID</span><span class="si">}</span>
+mkdir -p <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+
+cp <span class="si">${</span><span class="nv">SLURM_SUBMIT_DIR</span><span class="si">}</span>/test.py <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+
+<span class="c1"># each job will see a different ${SLURM_ARRAY_TASK_ID}</span>
+<span class="nb">echo</span> <span class="s2">&quot;now processing task id:: &quot;</span> <span class="si">${</span><span class="nv">SLURM_ARRAY_TASK_ID</span><span class="si">}</span>
+python test.py &gt; output_<span class="si">${</span><span class="nv">SLURM_ARRAY_TASK_ID</span><span class="si">}</span>.txt
+
+<span class="c1"># after the job is done we copy our output back to $SLURM_SUBMIT_DIR</span>
+cp output_<span class="si">${</span><span class="nv">SLURM_ARRAY_TASK_ID</span><span class="si">}</span>.txt <span class="si">${</span><span class="nv">SLURM_SUBMIT_DIR</span><span class="si">}</span>
+
+<span class="c1"># we step out of the scratch directory and remove it</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">SLURM_SUBMIT_DIR</span><span class="si">}</span>
+rm -rf <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+
+<span class="c1"># happy end</span>
+<span class="nb">exit</span> <span class="m">0</span>
+</pre></div>
+</div>
+<p>Submit the script and after a short while you should see 16 output files
+in your submit directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls -l output*.txt
+
+-rw------- 1 user user 60 Oct 14 14:44 output_1.txt
+-rw------- 1 user user 60 Oct 14 14:44 output_10.txt
+-rw------- 1 user user 60 Oct 14 14:44 output_11.txt
+-rw------- 1 user user 60 Oct 14 14:44 output_12.txt
+-rw------- 1 user user 60 Oct 14 14:44 output_13.txt
+-rw------- 1 user user 60 Oct 14 14:44 output_14.txt
+-rw------- 1 user user 60 Oct 14 14:44 output_15.txt
+-rw------- 1 user user 60 Oct 14 14:44 output_16.txt
+-rw------- 1 user user 60 Oct 14 14:44 output_2.txt
+-rw------- 1 user user 60 Oct 14 14:44 output_3.txt
+-rw------- 1 user user 60 Oct 14 14:44 output_4.txt
+-rw------- 1 user user 60 Oct 14 14:44 output_5.txt
+-rw------- 1 user user 60 Oct 14 14:44 output_6.txt
+-rw------- 1 user user 60 Oct 14 14:44 output_7.txt
+-rw------- 1 user user 60 Oct 14 14:44 output_8.txt
+-rw------- 1 user user 60 Oct 14 14:44 output_9.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-recover-files-before-a-job-times-out">
+<h3>How to recover files before a job times out<a class="headerlink" href="#how-to-recover-files-before-a-job-times-out" title="Permalink to this headline">¶</a></h3>
+<p>Possibly you would like to clean up the work directory or recover
+files for restart in case a job times out. In this example we ask Slurm
+to send a signal to our script 120 seconds before it times out to give
+us a chance to perform clean-up actions.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
+
+<span class="c1"># job name</span>
+<span class="c1">#SBATCH --job-name=example</span>
+
+<span class="c1"># Machine</span>
+<span class="c1">#SBATCH --partition=triumphant-coal</span>
+
+<span class="c1"># one core only</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+
+<span class="c1"># we give this job 4 minutes</span>
+<span class="c1">#SBATCH --time=0-00:04:00</span>
+
+<span class="c1"># asks SLURM to send the USR1 signal 120 seconds before end of the time limit</span>
+<span class="c1">#SBATCH --signal=B:USR1@120</span>
+
+<span class="c1"># define the handler function</span>
+<span class="c1"># note that this is not executed here, but rather</span>
+<span class="c1"># when the associated signal is sent</span>
+your_cleanup_function<span class="o">()</span>
+<span class="o">{</span>
+    <span class="nb">echo</span> <span class="s2">&quot;function your_cleanup_function called at </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&quot;</span>
+    <span class="c1"># do whatever cleanup you want here</span>
+<span class="o">}</span>
+
+<span class="c1"># call your_cleanup_function once we receive USR1 signal</span>
+<span class="nb">trap</span> <span class="s1">&#39;your_cleanup_function&#39;</span> USR1
+
+<span class="nb">echo</span> <span class="s2">&quot;starting calculation at </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="c1"># the calculation &quot;computes&quot; (in this case sleeps) for 1000 seconds</span>
+<span class="c1"># but we asked slurm only for 240 seconds so it will not finish</span>
+<span class="c1"># the &quot;&amp;&quot; after the compute step and &quot;wait&quot; are important</span>
+sleep <span class="m">1000</span> <span class="p">&amp;</span>
+<span class="nb">wait</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="openmp-and-mpi">
+<h2>OpenMP and MPI<a class="headerlink" href="#openmp-and-mpi" title="Permalink to this headline">¶</a></h2>
+<p>You can download the examples given here to a file (e.g. run.sh) and start it with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sbatch run.sh
+</pre></div>
+</div>
+<div class="section" id="example-for-an-openmp-job">
+<h3>Example for an OpenMP job<a class="headerlink" href="#example-for-an-openmp-job" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
+
+<span class="c1">#############################</span>
+<span class="c1"># example for an OpenMP job #</span>
+<span class="c1">#############################</span>
+
+<span class="c1">#SBATCH --job-name=example</span>
+
+<span class="c1"># we ask for 1 task with 20 cores</span>
+<span class="c1">#SBATCH --partition=triumphant-coal</span>
+<span class="c1">#SBATCH --ntasks-per-node=1</span>
+<span class="c1">#SBATCH --cpus-per-task=20</span>
+
+<span class="c1"># exclusive makes all memory available</span>
+<span class="c1">#SBATCH --exclusive</span>
+
+<span class="c1"># run for five minutes</span>
+<span class="c1">#              d-hh:mm:ss</span>
+<span class="c1">#SBATCH --time=0-00:05:00</span>
+
+<span class="c1"># turn on all mail notification</span>
+<span class="c1">#SBATCH --mail-type=ALL</span>
+
+<span class="c1"># you may not place bash commands before the last SBATCH directive</span>
+
+<span class="c1"># define and create a unique scratch directory</span>
+<span class="nv">SCRATCH_DIRECTORY</span><span class="o">=</span>/scratch/<span class="si">${</span><span class="nv">USER</span><span class="si">}</span>/example/<span class="si">${</span><span class="nv">SLURM_JOBID</span><span class="si">}</span>
+mkdir -p <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+
+<span class="c1"># we copy everything we need to the scratch directory</span>
+<span class="c1"># ${SLURM_SUBMIT_DIR} points to the path where this script was submitted from</span>
+cp <span class="si">${</span><span class="nv">SLURM_SUBMIT_DIR</span><span class="si">}</span>/my_binary.x <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+
+<span class="c1"># we set OMP_NUM_THREADS to the number of available cores</span>
+<span class="nb">export</span> <span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span>
+
+<span class="c1"># we execute the job and time it</span>
+<span class="nb">time</span> ./my_binary.x &gt; my_output
+
+<span class="c1"># after the job is done we copy our output back to $SLURM_SUBMIT_DIR</span>
+cp <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>/my_output <span class="si">${</span><span class="nv">SLURM_SUBMIT_DIR</span><span class="si">}</span>
+
+<span class="c1"># we step out of the scratch directory and remove it</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">SLURM_SUBMIT_DIR</span><span class="si">}</span>
+rm -rf <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+
+<span class="c1"># happy end</span>
+<span class="nb">exit</span> <span class="m">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-for-a-mpi-job">
+<h3>Example for a MPI job<a class="headerlink" href="#example-for-a-mpi-job" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
+
+<span class="c1">##########################</span>
+<span class="c1"># example for an MPI job #</span>
+<span class="c1">##########################</span>
+
+<span class="c1">#SBATCH --job-name=example</span>
+
+<span class="c1">#SBATCH --partition=triumphant-coal</span>
+
+<span class="c1"># run for five minutes</span>
+<span class="c1">#              d-hh:mm:ss</span>
+<span class="c1">#SBATCH --time=0-00:05:00</span>
+
+<span class="c1"># turn on all mail notification</span>
+<span class="c1">#SBATCH --mail-type=ALL</span>
+
+<span class="c1"># you may not place bash commands before the last SBATCH directive</span>
+
+<span class="c1"># define and create a unique scratch directory</span>
+<span class="nv">SCRATCH_DIRECTORY</span><span class="o">=</span>/scratch/<span class="si">${</span><span class="nv">USER</span><span class="si">}</span>/example/<span class="si">${</span><span class="nv">SLURM_JOBID</span><span class="si">}</span>
+mkdir -p <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+
+<span class="c1"># we copy everything we need to the scratch directory</span>
+<span class="c1"># ${SLURM_SUBMIT_DIR} points to the path where this script was submitted from</span>
+cp <span class="si">${</span><span class="nv">SLURM_SUBMIT_DIR</span><span class="si">}</span>/my_binary.x <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+
+<span class="c1"># we execute the job and time it</span>
+<span class="nb">time</span> mpirun -np <span class="nv">$SLURM_NTASKS</span> ./my_binary.x &gt; my_output
+
+<span class="c1"># after the job is done we copy our output back to $SLURM_SUBMIT_DIR</span>
+cp <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>/my_output <span class="si">${</span><span class="nv">SLURM_SUBMIT_DIR</span><span class="si">}</span>
+
+<span class="c1"># we step out of the scratch directory and remove it</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">SLURM_SUBMIT_DIR</span><span class="si">}</span>
+rm -rf <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+
+<span class="c1"># happy end</span>
+<span class="nb">exit</span> <span class="m">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-for-a-hybrid-mpi-openmp-job">
+<h3>Example for a hybrid MPI/OpenMP job<a class="headerlink" href="#example-for-a-hybrid-mpi-openmp-job" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
+
+<span class="c1">#######################################</span>
+<span class="c1"># example for a hybrid MPI OpenMP job #</span>
+<span class="c1">#######################################</span>
+
+<span class="c1">#SBATCH --job-name=example</span>
+
+<span class="c1"># we ask for 2 MPI tasks with 10 cores each</span>
+<span class="c1">#SBATCH --partition=triumphant-coal</span>
+<span class="c1">#SBATCH --ntasks-per-node=2</span>
+<span class="c1">#SBATCH --cpus-per-task=10</span>
+
+<span class="c1"># run for five minutes</span>
+<span class="c1">#              d-hh:mm:ss</span>
+<span class="c1">#SBATCH --time=0-00:05:00</span>
+
+<span class="c1"># 500MB memory per core</span>
+<span class="c1"># this is a hard limit</span>
+<span class="c1">#SBATCH --mem-per-cpu=500MB</span>
+
+<span class="c1"># turn on all mail notification</span>
+<span class="c1">#SBATCH --mail-type=ALL</span>
+
+<span class="c1"># you may not place bash commands before the last SBATCH directive</span>
+
+<span class="c1"># define and create a unique scratch directory</span>
+<span class="nv">SCRATCH_DIRECTORY</span><span class="o">=</span>/scratch/<span class="si">${</span><span class="nv">USER</span><span class="si">}</span>/example/<span class="si">${</span><span class="nv">SLURM_JOBID</span><span class="si">}</span>
+mkdir -p <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+
+<span class="c1"># we copy everything we need to the scratch directory</span>
+<span class="c1"># ${SLURM_SUBMIT_DIR} points to the path where this script was submitted from</span>
+cp <span class="si">${</span><span class="nv">SLURM_SUBMIT_DIR</span><span class="si">}</span>/my_binary.x <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+
+<span class="c1"># we set OMP_NUM_THREADS to the number cpu cores per MPI task</span>
+<span class="nb">export</span> <span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span>
+
+<span class="c1"># we execute the job and time it</span>
+<span class="nb">time</span> mpirun -np <span class="nv">$SLURM_NTASKS</span> ./my_binary.x &gt; my_output
+
+<span class="c1"># after the job is done we copy our output back to $SLURM_SUBMIT_DIR</span>
+cp <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>/my_output <span class="si">${</span><span class="nv">SLURM_SUBMIT_DIR</span><span class="si">}</span>
+
+<span class="c1"># we step out of the scratch directory and remove it</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">SLURM_SUBMIT_DIR</span><span class="si">}</span>
+rm -rf <span class="si">${</span><span class="nv">SCRATCH_DIRECTORY</span><span class="si">}</span>
+
+<span class="c1"># happy end</span>
+<span class="nb">exit</span> <span class="m">0</span>
+</pre></div>
+</div>
+<p>If you want to start more than one MPI rank per node you can
+use <code class="docutils literal notranslate"><span class="pre">--ntasks-per-node</span></code> in combination with <code class="docutils literal notranslate"><span class="pre">--nodes</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#SBATCH --nodes=4 --ntasks-per-node=2 --cpus-per-task=8</span>
+</pre></div>
+</div>
+<p>This will start 2 MPI tasks each on 4 nodes, where each task can use up to 8 threads.</p>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/jobs/examples.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021, obm.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS) &#8212; OBM Group Cluster  documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/thebelab-helper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="About the LAMMPS install on Dilhan" href="lammps_on_dilhan.html" />
+    <link rel="prev" title="About the VASP install on Dilhan" href="../VASP/vasp_on_dilhan.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default ">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          OBM Clusters</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/getting_started.html#get-an-account">Get an account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/getting_started.html#connect-to-our-workstations">Connect to our workstations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/getting_started.html#on-nodes-and-files">On nodes and files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/getting_started.html#run-a-program">Run a program</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/guidelines.html">Guidelines for use of computer equipment at the METU Physics department</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/guidelines.html#definitions">Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/guidelines.html#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/guidelines.html#application">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/guidelines.html#good-faith">Good Faith</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/guidelines.html#data-safety">Data Safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/guidelines.html#respect-for-other-users-privacy">Respect for Other Users Privacy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/guidelines.html#proper-use">Proper Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/guidelines.html#awareness-of-the-purposes-for-use-of-resources">Awareness of the Purposes for Use of Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/guidelines.html#rights">Rights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/guidelines.html#liability">Liability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/guidelines.html#surveillance">Surveillance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/guidelines.html#sanctions">Sanctions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/guidelines.html#complaints">Complaints</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../workstations/overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../workstations/overview.html#resource-description">Resource description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../workstations/Carbon.html">Carbon</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../workstations/Carbon.html#make-model">Make &amp; Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../workstations/Carbon.html#intended-use">Intended use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../workstations/Carbon.html#hardware-summary">Hardware Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../workstations/Triumphant-Coal.html">Triumphant Coal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../workstations/Triumphant-Coal.html#make-model">Make &amp; Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../workstations/Triumphant-Coal.html#intended-use">Intended use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../workstations/Triumphant-Coal.html#hardware-summary">Hardware Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../workstations/Forever-Diamond.html">Forever Diamond</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../workstations/Forever-Diamond.html#make-model">Make &amp; Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../workstations/Forever-Diamond.html#intended-use">Intended use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../workstations/Forever-Diamond.html#hardware-summary">Hardware Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../workstations/Just-Read-The-Instructions.html">Just Read The Instructions (JRTI)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../workstations/Just-Read-The-Instructions.html#make-model">Make &amp; Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../workstations/Just-Read-The-Instructions.html#intended-use">Intended use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../workstations/Just-Read-The-Instructions.html#hardware-summary">Hardware Summary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Account</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../account/account.html">Getting an account</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../account/account.html#getting-started-on-the-machine-account-quota-password">Getting started on the machine (account, quota, password)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../account/account.html#how-to-get-an-account-and-a-cpu-quota">How to get an account and a CPU quota</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../account/login.html">Logging in for the first time</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../account/login.html#log-in-with-ssh">Log in with SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../account/login.html#obtain-a-new-password">Obtain a new password</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../account/accounting.html">Quotas</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jobs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../jobs/dos_and_donts.html">Dos and don’ts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../jobs/batch.html">Batch system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/batch.html#creating-a-job-script">Creating a job script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/batch.html#how-to-pass-command-line-parameters-to-the-job-script">How to pass command-line parameters to the job script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/batch.html#walltime">Walltime</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../jobs/examples.html">Job script examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/examples.html#basic-examples">Basic examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/examples.html#openmp-and-mpi">OpenMP and MPI</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../jobs/slurm_parameter.html">SLURM Workload Manager</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/slurm_parameter.html#slurm-parameter">SLURM Parameter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/slurm_parameter.html#differences-between-cpus-and-tasks">Differences between CPUs and tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/slurm_parameter.html#settings-for-openmp-and-mpi-jobs">Settings for OpenMP and MPI jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/slurm_parameter.html#job-related-environment-variables">Job related environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/slurm_parameter.html#partitions-queues-and-services">Partitions (queues) and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/slurm_parameter.html#general-job-limitations">General job limitations</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../jobs/interactive.html">Interactive jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/interactive.html#starting-an-interacitve-job">Starting an interacitve job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/interactive.html#keeping-interactive-jobs-alive">Keeping interactive jobs alive</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../jobs/job_management.html">Managing jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/job_management.html#job-status-descriptions-in-squeue">Job status descriptions in squeue</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../jobs/monitoring.html">Monitoring your jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/monitoring.html#slurm-commands">SLURM commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/monitoring.html#cpu-load-and-memory-consumption-of-your-job">CPU load and memory consumption of your job</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../jobs/running_mpi_jobs.html">Running MPI jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/running_mpi_jobs.html#intel-mpi">Intel MPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jobs/running_mpi_jobs.html#openmpi">OpenMPI</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Software</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../software/applications.html">Which software is installed on Dilhan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../software/applications.html#changes-in-application-software">Changes in application software</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../software/applications.html#missing-or-new-software">Missing or new software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../software/applications.html#conda-bioconda">Conda/ Bioconda</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../software/modules.html">Software Module Scheme</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../software/modules.html#which-modules-are-currently-loaded">Which modules are currently loaded?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/modules.html#which-modules-are-available">Which modules are available?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/modules.html#how-to-load-a-module">How to load a module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/modules.html#how-to-unload-a-module">How to unload a module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/modules.html#which-version-of-a-module-is-the-default">Which version of a module is the default?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/modules.html#how-do-i-switch-to-a-different-version-of-a-module">How do I switch to a different version of a module?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../software/python_r_perl.html">Python, R, Matlab and Perl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../software/python_r_perl.html#python">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/python_r_perl.html#r">R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/python_r_perl.html#matlab">MATLAB</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/linux.html">Linux command line</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/linux.html#new-on-linux-systems">New on Linux systems?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../help/AboutLicenses.html">General comments about licenses</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../sw_guides.html">Application guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../VASP/VASP.html">VASP (Vienna Ab initio Simulation Package)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../QE/espresso.html">Quantum Espresso</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Storage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../storage/storage.html">Storage and backup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/storage.html#available-file-system">Available file system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/storage.html#home-area">Home area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/storage.html#work-scratch-areas">Work/scratch areas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/storage.html#closing-of-user-account">Closing of user account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/storage.html#privacy-of-user-data">Privacy of user data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/storage.html#management-of-lage-files-200gb">Management of lage files (&gt; 200GB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/storage.html#management-of-many-small-files-10000">Management of many small files (&gt; 10000)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/storage.html#compression-of-data">Compression of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/storage.html#binary-data-and-endianness">Binary data and endianness</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../storage/file_transfer.html">Transferring files to/from Dilhan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/file_transfer.html#mounting-the-file-system-on-you-local-machine-using-sshfs">Mounting the file system on you local machine using sshfs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/file_transfer.html#subversion-and-rsync">Subversion and rsync</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Code development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../development/compilers.html">Compilers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../development/compilers.html#usage-of-the-intel-ifort-compiler">Usage of the Intel ifort compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development/compilers.html#usage-of-the-intel-c-c-compilers">Usage of the Intel C/C++ compilers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development/compilers.html#usage-of-the-nvidia-pgi-compilers">Usage of the NVIDIA (PGI) compilers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/environment.html">Environment modules</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="large-scale-atomic-molecular-massively-parallel-simulator-lammps">
+<span id="lammps"></span><h1>Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS)<a class="headerlink" href="#large-scale-atomic-molecular-massively-parallel-simulator-lammps" title="Permalink to this headline">¶</a></h1>
+<p>LAMMPS is a classical molecular dynamics code with a focus on materials modeling. It’s an acronym for Large-scale Atomic/Molecular Massively Parallel Simulator.</p>
+<div class="section" id="related-information">
+<h2>Related information<a class="headerlink" href="#related-information" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="lammps_on_dilhan.html">About the LAMMPS install on Dilhan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firsttime_lammps.html">First time you run a LAMMPS job?</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="general-information">
+<h2>General information<a class="headerlink" href="#general-information" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="description">
+<h3>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h3>
+<p>LAMMPS is a classical molecular dynamics code with a focus on materials modeling. It’s an acronym for Large-scale Atomic/Molecular Massively Parallel Simulator.</p>
+<p>LAMMPS has potentials for solid-state materials (metals, semiconductors) and soft matter (biomolecules, polymers) and coarse-grained or mesoscopic systems. It can be used to model atoms or, more generically, as a parallel particle simulator at the atomic, meso, or continuum scale.</p>
+<p>LAMMPS runs on single processors or in parallel using message-passing techniques and a spatial-decomposition of the simulation domain. Many of its models have versions that provide accelerated performance on CPUs, GPUs, and Intel Xeon Phis. The code is designed to be easy to modify or extend with new functionality.</p>
+<p>LAMMPS is distributed as an open source code under the terms of the GPL. The current version can be downloaded here. Links are also included to older versions. All LAMMPS development is done via GitHub, so all versions can also be accessed there. Periodic releases are also posted to SourceForge.</p>
+</div>
+<div class="section" id="online-information">
+<h3>Online information<a class="headerlink" href="#online-information" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Homepage: <a class="reference external" href="https://lammps.sandia.gov/">https://lammps.sandia.gov/</a></p></li>
+<li><p>Manual: <a class="reference external" href="https://lammps.sandia.gov/doc/Manual.html">https://lammps.sandia.gov/doc/Manual.html</a></p></li>
+<li><p>Tutorials: <a class="reference external" href="https://lammps.sandia.gov/tutorials.html">https://lammps.sandia.gov/tutorials.html</a></p></li>
+</ul>
+</div>
+<div class="section" id="license-and-access-policy">
+<h3>License and access policy<a class="headerlink" href="#license-and-access-policy" title="Permalink to this headline">¶</a></h3>
+<p>LAMMPS is distributed as an open source code under the terms of the GPL</p>
+</div>
+<div class="section" id="citation">
+<h3>Citation<a class="headerlink" href="#citation" title="Permalink to this headline">¶</a></h3>
+<p>When publishing results obtained with the referred software referred, please do check the developers web page in order to find the correct citation(s).</p>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>You load the application by typing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ module load lammps
+</pre></div>
+</div>
+<p>This command will give you the default version.</p>
+<p>For more information on available versions, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ module avail lammps
+</pre></div>
+</div>
+<div class="section" id="about-the-lammps-version-s-installed-on-dilhan">
+<h3>About the LAMMPS version(s) installed on Dilhan<a class="headerlink" href="#about-the-lammps-version-s-installed-on-dilhan" title="Permalink to this headline">¶</a></h3>
+<p>LAMMPS is a constantly evolving software with many subpackages. The compilation of the default version is described in : <a class="reference internal" href="lammps_on_dilhan.html"><span class="doc">About the LAMMPS install on Dilhan</span></a>.</p>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../../_sources/applications/LAMMPS/LAMMPS.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021, obm.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

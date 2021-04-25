@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SLURM Workload Manager &#8212; OBM Group Cluster  documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Interactive jobs" href="interactive.html" />
+    <link rel="prev" title="Job script examples" href="examples.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default ">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          OBM Clusters</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html#get-an-account">Get an account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html#connect-to-our-workstations">Connect to our workstations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html#on-nodes-and-files">On nodes and files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html#run-a-program">Run a program</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/guidelines.html">Guidelines for use of computer equipment at the METU Physics department</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#definitions">Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#application">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#good-faith">Good Faith</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#data-safety">Data Safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#respect-for-other-users-privacy">Respect for Other Users Privacy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#proper-use">Proper Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#awareness-of-the-purposes-for-use-of-resources">Awareness of the Purposes for Use of Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#rights">Rights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#liability">Liability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#surveillance">Surveillance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#sanctions">Sanctions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#complaints">Complaints</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../workstations/overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../workstations/overview.html#resource-description">Resource description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../workstations/Carbon.html">Carbon</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../workstations/Carbon.html#make-model">Make &amp; Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workstations/Carbon.html#intended-use">Intended use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workstations/Carbon.html#hardware-summary">Hardware Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../workstations/Triumphant-Coal.html">Triumphant Coal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../workstations/Triumphant-Coal.html#make-model">Make &amp; Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workstations/Triumphant-Coal.html#intended-use">Intended use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workstations/Triumphant-Coal.html#hardware-summary">Hardware Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../workstations/Forever-Diamond.html">Forever Diamond</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../workstations/Forever-Diamond.html#make-model">Make &amp; Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workstations/Forever-Diamond.html#intended-use">Intended use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workstations/Forever-Diamond.html#hardware-summary">Hardware Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../workstations/Just-Read-The-Instructions.html">Just Read The Instructions (JRTI)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../workstations/Just-Read-The-Instructions.html#make-model">Make &amp; Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workstations/Just-Read-The-Instructions.html#intended-use">Intended use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workstations/Just-Read-The-Instructions.html#hardware-summary">Hardware Summary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Account</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../account/account.html">Getting an account</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../account/account.html#getting-started-on-the-machine-account-quota-password">Getting started on the machine (account, quota, password)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../account/account.html#how-to-get-an-account-and-a-cpu-quota">How to get an account and a CPU quota</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../account/login.html">Logging in for the first time</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../account/login.html#log-in-with-ssh">Log in with SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../account/login.html#obtain-a-new-password">Obtain a new password</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../account/accounting.html">Quotas</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jobs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dos_and_donts.html">Dos and don’ts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch.html">Batch system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="batch.html#creating-a-job-script">Creating a job script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch.html#how-to-pass-command-line-parameters-to-the-job-script">How to pass command-line parameters to the job script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch.html#walltime">Walltime</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Job script examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#basic-examples">Basic examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#openmp-and-mpi">OpenMP and MPI</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SLURM Workload Manager</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#slurm-parameter">SLURM Parameter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#differences-between-cpus-and-tasks">Differences between CPUs and tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#settings-for-openmp-and-mpi-jobs">Settings for OpenMP and MPI jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#job-related-environment-variables">Job related environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#partitions-queues-and-services">Partitions (queues) and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#general-job-limitations">General job limitations</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="interactive.html">Interactive jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive.html#starting-an-interacitve-job">Starting an interacitve job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive.html#keeping-interactive-jobs-alive">Keeping interactive jobs alive</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="job_management.html">Managing jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="job_management.html#job-status-descriptions-in-squeue">Job status descriptions in squeue</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring.html">Monitoring your jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring.html#slurm-commands">SLURM commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring.html#cpu-load-and-memory-consumption-of-your-job">CPU load and memory consumption of your job</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="running_mpi_jobs.html">Running MPI jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running_mpi_jobs.html#intel-mpi">Intel MPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_mpi_jobs.html#openmpi">OpenMPI</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Software</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software/applications.html">Which software is installed on Dilhan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software/applications.html#changes-in-application-software">Changes in application software</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../software/applications.html#missing-or-new-software">Missing or new software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software/applications.html#conda-bioconda">Conda/ Bioconda</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../software/modules.html">Software Module Scheme</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#which-modules-are-currently-loaded">Which modules are currently loaded?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#which-modules-are-available">Which modules are available?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#how-to-load-a-module">How to load a module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#how-to-unload-a-module">How to unload a module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#which-version-of-a-module-is-the-default">Which version of a module is the default?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#how-do-i-switch-to-a-different-version-of-a-module">How do I switch to a different version of a module?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../software/python_r_perl.html">Python, R, Matlab and Perl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software/python_r_perl.html#python">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/python_r_perl.html#r">R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/python_r_perl.html#matlab">MATLAB</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/linux.html">Linux command line</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/linux.html#new-on-linux-systems">New on Linux systems?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../help/AboutLicenses.html">General comments about licenses</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../applications/sw_guides.html">Application guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../applications/VASP/VASP.html">VASP (Vienna Ab initio Simulation Package)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../applications/LAMMPS/LAMMPS.html">Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../applications/QE/espresso.html">Quantum Espresso</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Storage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../storage/storage.html">Storage and backup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#available-file-system">Available file system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#home-area">Home area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#work-scratch-areas">Work/scratch areas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#closing-of-user-account">Closing of user account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#privacy-of-user-data">Privacy of user data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#management-of-lage-files-200gb">Management of lage files (&gt; 200GB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#management-of-many-small-files-10000">Management of many small files (&gt; 10000)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#compression-of-data">Compression of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/storage.html#binary-data-and-endianness">Binary data and endianness</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../storage/file_transfer.html">Transferring files to/from Dilhan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../storage/file_transfer.html#mounting-the-file-system-on-you-local-machine-using-sshfs">Mounting the file system on you local machine using sshfs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/file_transfer.html#subversion-and-rsync">Subversion and rsync</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Code development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/compilers.html">Compilers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development/compilers.html#usage-of-the-intel-ifort-compiler">Usage of the Intel ifort compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/compilers.html#usage-of-the-intel-c-c-compilers">Usage of the Intel C/C++ compilers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/compilers.html#usage-of-the-nvidia-pgi-compilers">Usage of the NVIDIA (PGI) compilers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development/environment.html">Environment modules</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="slurm-workload-manager">
+<span id="slurm"></span><h1>SLURM Workload Manager<a class="headerlink" href="#slurm-workload-manager" title="Permalink to this headline">¶</a></h1>
+<p>SLURM is the workload manager and job scheduler used for our group cluster.</p>
+<p>There are two ways of starting jobs with SLURM; either interactively with <code class="docutils literal notranslate"><span class="pre">srun</span></code>
+or as a script with <code class="docutils literal notranslate"><span class="pre">sbatch</span></code>.</p>
+<p>Interactive jobs are a good way to test your setup before you put it into a script
+or to work with interactive applications like MATLAB or python.
+You immediately see the results and can check if all parts behave as you expected.
+See <a class="reference internal" href="interactive.html#interactive"><span class="std std-ref">Interactive jobs</span></a> for more details.</p>
+<div class="section" id="slurm-parameter">
+<span id="id1"></span><h2>SLURM Parameter<a class="headerlink" href="#slurm-parameter" title="Permalink to this headline">¶</a></h2>
+<p>SLURM supports a multitude of different parameters.
+This enables you to effectivly tailor your script to your need when using our group cluster
+but also means that is easy to get lost and waste your time and quota.</p>
+<p>The following parameters can be used as command line parameters with <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> and
+<code class="docutils literal notranslate"><span class="pre">srun</span></code> or in jobscript, see <a class="reference internal" href="examples.html#job-script-examples"><span class="std std-ref">Job script examples</span></a>.
+To use it in a jobscript, start a newline with <code class="docutils literal notranslate"><span class="pre">#SBTACH</span></code> followed by the parameter.
+Replace &lt;….&gt; with the value you want, e.g. <code class="docutils literal notranslate"><span class="pre">--job-name=test-job</span></code>.</p>
+<div class="section" id="basic-settings">
+<h3>Basic settings:<a class="headerlink" href="#basic-settings" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 73%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>–job-name=&lt;name&gt;</p></td>
+<td><p>Job name to be displayed by for example <code class="docutils literal notranslate"><span class="pre">squeue</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>–output=&lt;path&gt;</p></td>
+<td><div class="line-block">
+<div class="line">Path to the file where the job (error) output is written to</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>–mail-type=&lt;type&gt;</p></td>
+<td><div class="line-block">
+<div class="line">Turn on mail notification; type can be one of BEGIN, END, FAIL, REQUEUE or ALL</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>–mail-user=&lt;email_address&gt;</p></td>
+<td><p>Email address to send notifications to</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="requesting-resources">
+<h3>Requesting Resources<a class="headerlink" href="#requesting-resources" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>–time=&lt;d-hh:mm:ss&gt;</p></td>
+<td><p>Time limit for job. Job will be killed by SLURM after time has run out. Format days-hours:minutes:seconds</p></td>
+</tr>
+<tr class="row-odd"><td><p>–nodes=&lt;num_nodes&gt;</p></td>
+<td><p>Number of nodes. Multiple nodes are only useful for jobs with distributed-memory (e.g. MPI).</p></td>
+</tr>
+<tr class="row-even"><td><p>–mem=&lt;MB&gt;</p></td>
+<td><p>Memory (RAM) per node. Number followed by unit prefix, e.g. 16G</p></td>
+</tr>
+<tr class="row-odd"><td><p>–mem-per-cpu=&lt;MB&gt;</p></td>
+<td><p>Memory (RAM) per requested CPU core</p></td>
+</tr>
+<tr class="row-even"><td><p>–ntasks-per-node=&lt;num_procs&gt;</p></td>
+<td><p>Number of (MPI) processes per node. More than one useful only for MPI jobs. Maximum number depends nodes (number of cores)</p></td>
+</tr>
+<tr class="row-odd"><td><p>–cpus-per-task=&lt;num_threads&gt;</p></td>
+<td><p>CPU cores per task. For MPI use one. For parallelized applications benchmark this is the number of threads.</p></td>
+</tr>
+<tr class="row-even"><td><p>–exclusive</p></td>
+<td><p>Job will not share nodes with other running jobs. You will be charged for the complete nodes even if you asked for less.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="accounting">
+<h3>Accounting<a class="headerlink" href="#accounting" title="Permalink to this headline">¶</a></h3>
+<p>See also <a class="reference internal" href="#label-partitions"><span class="std std-ref">Partitions (queues) and services</span></a>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 87%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>–account=&lt;name&gt;</p></td>
+<td><p>Project (not user) account the job should be charged to.</p></td>
+</tr>
+<tr class="row-odd"><td><p>–partition=&lt;name&gt;</p></td>
+<td><p>Partition/queue in which o run the job.</p></td>
+</tr>
+<tr class="row-even"><td><p>–qos=devel</p></td>
+<td><p>On our group cluster the <em>devel</em> QOS (quality of servive) can be used to submit short jobs for testing and debugging.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="advanced-job-control">
+<h3>Advanced Job Control<a class="headerlink" href="#advanced-job-control" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 86%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>–array=&lt;indexes&gt;</p></td>
+<td><p>Submit a collection of similar jobs, e.g. <code class="docutils literal notranslate"><span class="pre">--array=1-10</span></code>. (sbatch command only). See official <a class="reference external" href="https://slurm.schedmd.com/job_array.html">SLURM documentation</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>–dependency=&lt;state:jobid&gt;</p></td>
+<td><p>Wait with the start of the job until specified dependencies have been satified. E.g. –dependency=afterok:123456</p></td>
+</tr>
+<tr class="row-even"><td><p>–ntasks-per-core=2</p></td>
+<td><p>Enables hyperthreading. Only useful in special circumstances.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="differences-between-cpus-and-tasks">
+<h2>Differences between CPUs and tasks<a class="headerlink" href="#differences-between-cpus-and-tasks" title="Permalink to this headline">¶</a></h2>
+<p>As a new users writing your first SLURM job script the difference between
+<code class="docutils literal notranslate"><span class="pre">--ntasks</span></code> and <code class="docutils literal notranslate"><span class="pre">--cpus-per-taks</span></code> is typically quite confusing.
+Assuming you want to run your program on a single node with  16 cores which
+SLURM parameters should you specify?</p>
+<p>The answer is it depends whether the your application supports MPI.
+MPI (message passing protocol) is a communication interface used for developing
+parallel computing programs on distributed memory systems.
+This is necessary for applications running on multiple computers (nodes) to be able to
+share (intermediate) results.</p>
+<p>To decide which set of parameters you should use, check if your application utilizes
+MPI and therefore would benefit from running on multiple nodes simultaneously.
+On the other hand you have an non-MPI enables application or made a mistake in
+your setup, it doesn’t make sense to request more than one node.</p>
+</div>
+<div class="section" id="settings-for-openmp-and-mpi-jobs">
+<span id="slurm-recommendations"></span><h2>Settings for OpenMP and MPI jobs<a class="headerlink" href="#settings-for-openmp-and-mpi-jobs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="single-node-jobs">
+<h3>Single node jobs<a class="headerlink" href="#single-node-jobs" title="Permalink to this headline">¶</a></h3>
+<p>For applications that are not optimized for HPC (high performance computing) systems
+like simple python or R scripts and a lot of software which is optimized for desktop PCs.</p>
+<div class="section" id="simple-applications-and-scripts">
+<h4>Simple applications and scripts<a class="headerlink" href="#simple-applications-and-scripts" title="Permalink to this headline">¶</a></h4>
+<p>Many simple tools and scripts are not parallized at all and therefore won’t profit from
+more than one CPU core.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>–nodes=1</p></td>
+<td><p>Start a unparallized job on only one node</p></td>
+</tr>
+<tr class="row-odd"><td><p>–ntasks-per-node=1</p></td>
+<td><p>For OpenMP, only one task is necessary</p></td>
+</tr>
+<tr class="row-even"><td><p>–cpus-per-task=1</p></td>
+<td><p>Just one CPU core will be used.</p></td>
+</tr>
+<tr class="row-odd"><td><p>–mem=&lt;MB&gt;</p></td>
+<td><p>Memory (RAM) for the job. Number followed by unit prefix, e.g. 16G</p></td>
+</tr>
+</tbody>
+</table>
+<p>If you are unsure if your application can benefit from more cores try a higher number and
+observe the load of your job. If it stays at approximately one there is no need to ask for more than one.</p>
+</div>
+<div class="section" id="openmp-applications">
+<h4>OpenMP applications<a class="headerlink" href="#openmp-applications" title="Permalink to this headline">¶</a></h4>
+<p>OpenMP (Open Multi-Processing) is a multiprocessing library is often used for programs on
+shared memory systems. Shared memory describes systems which share the memory between all
+processing units (CPU cores), so that each process can access all data on that system.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>–nodes=1</p></td>
+<td><p>Start a parallel job for a shared memory system on only one node</p></td>
+</tr>
+<tr class="row-odd"><td><p>–ntasks-per-node=1</p></td>
+<td><p>For OpenMP, only one task is necessary</p></td>
+</tr>
+<tr class="row-even"><td><p>–cpus-per-task=&lt;num_threads&gt;</p></td>
+<td><p>Number of threads (CPU cores) to use</p></td>
+</tr>
+<tr class="row-odd"><td><p>–mem=&lt;MB&gt;</p></td>
+<td><p>Memory (RAM) for the job. Number followed by unit prefix, e.g. 16G</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="multiple-node-jobs-mpi">
+<h3>Multiple node jobs (MPI)<a class="headerlink" href="#multiple-node-jobs-mpi" title="Permalink to this headline">¶</a></h3>
+<p>For MPI applications.</p>
+<p>Depending on the frequency and bandwidth demand of your setup, you can either just start a number of MPI tasks or request whole nodes.
+While using whole nodes guarantees that a low latency and high bandwidth it usually results in a longer queuing time compared to cluster wide job.
+With the latter the SLURM manager can distribute your task across all nodes of our group cluster and utilize otherwise unused cores on nodes which for example run a 16 core job on a 20 core node. This usually results in shorter queuing times but slower inter-process connection speeds.</p>
+<p>We strongly advice all users to ask for a given set of cores when submitting
+multi-core jobs.  To make sure that you utilize full nodes, you should ask for
+sets that adds up to both 16 and 20 (80, 160 etc) due to the hardware specifics
+of our group cluster i.e. submit the job with <code class="docutils literal notranslate"><span class="pre">--ntasks=80</span></code> <strong>if</strong> your application
+scales to this number of tasks.</p>
+<p>This will make the best use of the resources and give the most predictable
+execution times. If your job requires more than the default available memory per
+core (32 GB/node gives 2 GB/core for 16 core nodes and 1.6GB/core for 20 core
+nodes) you should adjust this need with the following command: <code class="docutils literal notranslate"><span class="pre">#SBATCH</span>
+<span class="pre">--mem-per-cpu=4GB</span></code> When doing this, the batch system will automatically allocate
+8 cores or less per node.</p>
+<div class="section" id="to-use-whole-nodes">
+<h4>To use whole nodes<a class="headerlink" href="#to-use-whole-nodes" title="Permalink to this headline">¶</a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>–nodes=&lt;num_nodes&gt;</p></td>
+<td><p>Start a parallel job for a distributed memory system on several nodes</p></td>
+</tr>
+<tr class="row-odd"><td><p>–ntasks-per-node=&lt;num_procs&gt;</p></td>
+<td><p>Number of (MPI) processes per node. Maximum number depends nodes (16 or 20 on our group cluster)</p></td>
+</tr>
+<tr class="row-even"><td><p>–cpus-per-task=1</p></td>
+<td><p>Use one CPU core per task.</p></td>
+</tr>
+<tr class="row-odd"><td><p>–exclusive</p></td>
+<td><p>Job will not share nodes with other running jobs. You don’t need to specify memory as you will get all available on the node.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="to-distribute-your-job">
+<h4>To distribute your job<a class="headerlink" href="#to-distribute-your-job" title="Permalink to this headline">¶</a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>–ntasks=&lt;num_procs&gt;</p></td>
+<td><p>Number of (MPI) processes in total. Equals to the number of cores</p></td>
+</tr>
+<tr class="row-odd"><td><p>–mem-per-cpu=&lt;MB&gt;</p></td>
+<td><p>Memory (RAM) per requested CPU core. Number followed by unit prefix, e.g. 2G</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="scalability">
+<h3>Scalability<a class="headerlink" href="#scalability" title="Permalink to this headline">¶</a></h3>
+<p>You should run a few tests to see what is the best fit between minimizing
+runtime and maximizing your allocated cpu-quota. That is you should not ask for
+more cpus for a job than you really can utilize efficiently. Try to run your
+job on 1, 2, 4, 8, 16, etc., cores to see when the runtime for your job starts
+tailing off. When you start to see less than 30% improvement in runtime when
+doubling the cpu-counts you should probably not go any further. Recommendations
+to a few of the most used applications can be found in <a class="reference internal" href="../applications/sw_guides.html#sw-guides"><span class="std std-ref">Application guides</span></a>.</p>
+</div>
+</div>
+<div class="section" id="job-related-environment-variables">
+<h2>Job related environment variables<a class="headerlink" href="#job-related-environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>Here we list some environment variables that are defined when you run a job
+script.  These is not a complete list. Please consult the SLURM documentation
+for a complete list.</p>
+<p>Job number:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SLURM_JOBID</span>
+<span class="n">SLURM_ARRAY_TASK_ID</span>  <span class="c1"># relevant when you are using job arrays</span>
+</pre></div>
+</div>
+<p>List of nodes used in a job:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SLURM_NODELIST</span>
+</pre></div>
+</div>
+<p>We recommend to construct a variable yourself and use that in your script, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>SCRATCH_DIRECTORY=/global/work/${USER}/my-example/${SLURM_JOBID}
+</pre></div>
+</div>
+<p>The reason for this is that if you forget to sbatch your job script, then $SCRATCH may suddenly be undefined and you risk erasing your
+entire /global/work/${USER}.</p>
+<p>Submit directory (this is the directory where you have sbatched your job):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SUBMITDIR</span>
+<span class="n">SLURM_SUBMIT_DIR</span>
+</pre></div>
+</div>
+<p>Default number of threads:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OMP_NUM_THREADS</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>Task count:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SLURM_NTASKS</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="partitions-queues-and-services">
+<span id="label-partitions"></span><h2>Partitions (queues) and services<a class="headerlink" href="#partitions-queues-and-services" title="Permalink to this headline">¶</a></h2>
+<p>SLURM differs slightly from the previous Torque system with respect to
+definitions of various parameters, and what was known as queues in Torque may
+be covered by both <code class="docutils literal notranslate"><span class="pre">--partition=...</span></code> and <code class="docutils literal notranslate"><span class="pre">--qos=...</span></code>.</p>
+<p>In our group workstations, each workstation has a seperate partition. See individual nodes for their properties.</p>
+<p>To figure out the walltime limits for the various partitions, type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sinfo --format=&quot;%P %l&quot;  # small L
+</pre></div>
+</div>
+</div>
+<div class="section" id="general-job-limitations">
+<h2>General job limitations<a class="headerlink" href="#general-job-limitations" title="Permalink to this headline">¶</a></h2>
+<p>The following limits are the default per user in the batch system. Users
+can ask for increased limits by sending a request to <a class="reference external" href="mailto:mbaris&#37;&#52;&#48;metu&#46;edu&#46;tr">mbaris<span>&#64;</span>metu<span>&#46;</span>edu<span>&#46;</span>tr</a>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 62%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Limit</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Maximum walltime</p></td>
+<td><p>3 days</p></td>
+</tr>
+<tr class="row-odd"><td><p>Maximum memory per job</p></td>
+<td><p>No limit [1]</p></td>
+</tr>
+</tbody>
+</table>
+<p>[1] There is a practical limit of workstation memory</p>
+<p>See <a class="reference internal" href="../workstations/overview.html#overview"><span class="std std-ref">Overview</span></a> chapter of the documentation if you need more information on the workstations</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/jobs/slurm_parameter.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021, obm.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

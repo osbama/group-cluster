@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transferring files to/from our group cluster &#8212; OBM Group Cluster  documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Compilers" href="../development/compilers.html" />
+    <link rel="prev" title="Storage and backup" href="storage.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default ">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          OBM Clusters</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html#get-an-account">Get an account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html#connect-to-our-workstations">Connect to our workstations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html#on-nodes-and-files">On nodes and files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html#run-a-program">Run a program</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/guidelines.html">Guidelines for use of computer equipment at the METU Physics department</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#definitions">Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#application">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#good-faith">Good Faith</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#data-safety">Data Safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#respect-for-other-users-privacy">Respect for Other Users Privacy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#proper-use">Proper Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#awareness-of-the-purposes-for-use-of-resources">Awareness of the Purposes for Use of Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#rights">Rights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#liability">Liability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#surveillance">Surveillance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#sanctions">Sanctions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/guidelines.html#complaints">Complaints</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../resources/workstations.html">Workstations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../resources/workstations.html#id1">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../resources/workstations.html#individual-workstation-information">Individual Workstation information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/SBCs.html">Single Board Computers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../resources/SBCs.html#overview">Overview</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Account</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../account/account.html">Getting an account</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../account/account.html#getting-started-on-the-machine-account-quota-password">Getting started on the machine (account, quota, password)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../account/account.html#how-to-get-an-account-and-a-cpu-quota">How to get an account and a CPU quota</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../account/login.html">Logging in for the first time</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../account/login.html#log-in-with-ssh">Log in with SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../account/login.html#obtain-a-new-password">Obtain a new password</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../account/accounting.html">Quotas</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jobs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../jobs/dos_and_donts.html">Dos and don’ts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jobs/batch.html">Batch system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/batch.html#creating-a-job-script">Creating a job script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/batch.html#how-to-pass-command-line-parameters-to-the-job-script">How to pass command-line parameters to the job script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/batch.html#walltime">Walltime</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../jobs/examples.html">Job script examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/examples.html#basic-examples">Basic examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/examples.html#openmp-and-mpi">OpenMP and MPI</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../jobs/slurm_parameter.html">SLURM Workload Manager</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/slurm_parameter.html#slurm-parameter">SLURM Parameter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/slurm_parameter.html#differences-between-cpus-and-tasks">Differences between CPUs and tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/slurm_parameter.html#settings-for-openmp-and-mpi-jobs">Settings for OpenMP and MPI jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/slurm_parameter.html#job-related-environment-variables">Job related environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/slurm_parameter.html#partitions-queues-and-services">Partitions (queues) and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/slurm_parameter.html#general-job-limitations">General job limitations</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../jobs/interactive.html">Interactive jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/interactive.html#starting-an-interacitve-job">Starting an interacitve job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/interactive.html#keeping-interactive-jobs-alive">Keeping interactive jobs alive</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../jobs/job_management.html">Managing jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/job_management.html#job-status-descriptions-in-squeue">Job status descriptions in squeue</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../jobs/monitoring.html">Monitoring your jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/monitoring.html#slurm-commands">SLURM commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/monitoring.html#cpu-load-and-memory-consumption-of-your-job">CPU load and memory consumption of your job</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../jobs/running_mpi_jobs.html">Running MPI jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/running_mpi_jobs.html#intel-mpi">Intel MPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jobs/running_mpi_jobs.html#openmpi">OpenMPI</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Software</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software/applications.html">Which software is installed on our cluster</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software/applications.html#changes-in-application-software">Changes in application software</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../software/applications.html#missing-or-new-software">Missing or new software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software/applications.html#conda">Conda</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../software/modules.html">Software Module Scheme</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#which-modules-are-currently-loaded">Which modules are currently loaded?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#which-modules-are-available">Which modules are available?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#how-to-load-a-module">How to load a module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#how-to-unload-a-module">How to unload a module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#which-version-of-a-module-is-the-default">Which version of a module is the default?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/modules.html#how-do-i-switch-to-a-different-version-of-a-module">How do I switch to a different version of a module?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../software/python_r_perl.html">Python, R, Matlab and Perl</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software/python_r_perl.html#python">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software/python_r_perl.html#matlab">MATLAB</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/linux.html">Linux command line</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/linux.html#new-on-linux-systems">New on Linux systems?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../help/AboutLicenses.html">General comments about licenses</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../applications/sw_guides.html">Application guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../applications/VASP/VASP.html">VASP (Vienna Ab initio Simulation Package)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../applications/LAMMPS/LAMMPS.html">Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../applications/QE/espresso.html">Quantum Espresso</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Storage</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="storage.html">Storage and backup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#available-file-system">Available file system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#home-area">Home area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#work-scratch-areas">Work/scratch areas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#closing-of-user-account">Closing of user account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#privacy-of-user-data">Privacy of user data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#management-of-many-small-files-10000">Management of many small files (&gt; 10000)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#compression-of-data">Compression of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#binary-data-and-endianness">Binary data and endianness</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Transferring files to/from our group cluster</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#carbon-head-node-and-home-directories">Carbon (Head node and home directories)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mistake-not-nas-server">Mistake Not… (NAS server)</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Code development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/compilers.html">Compilers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development/compilers.html#usage-of-the-intel-ifort-compiler">Usage of the Intel ifort compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/compilers.html#usage-of-the-intel-c-c-compilers">Usage of the Intel C/C++ compilers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/compilers.html#usage-of-the-nvidia-pgi-compilers">Usage of the NVIDIA (PGI) compilers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development/environment.html">Environment modules</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="transferring-files-to-from-our-group-cluster">
+<span id="file-transfer"></span><h1>Transferring files to/from our group cluster<a class="headerlink" href="#transferring-files-to-from-our-group-cluster" title="Permalink to this headline">¶</a></h1>
+<p>Only ssh type of access is open to our group cluster’s head node. However, we also have a
+NAS server. To upload or download data to your home directory, scp and sftp can be used.</p>
+<div class="section" id="carbon-head-node-and-home-directories">
+<h2>Carbon (Head node and home directories)<a class="headerlink" href="#carbon-head-node-and-home-directories" title="Permalink to this headline">¶</a></h2>
+<p>To transfer data to and from our group cluster’s head node use the following address:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">carbon</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">metu</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">tr</span>
+</pre></div>
+</div>
+<p>This address has nodes with 10Gb network interfaces.</p>
+<p>Basic tools (scp, sftp)</p>
+<p>Standard scp command and sftp clients can be used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">carbon</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">metu</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">tr</span>
+<span class="n">ssh</span> <span class="o">-</span><span class="n">l</span> <span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;</span> <span class="n">carbon</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">metu</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">tr</span>
+
+<span class="n">sftp</span> <span class="n">carbon</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">metu</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">tr</span>
+<span class="n">sftp</span> <span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;</span><span class="nd">@carbon</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">metu</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">tr</span>
+</pre></div>
+</div>
+<div class="section" id="mounting-the-file-system-on-you-local-machine-using-sshfs">
+<h3>Mounting the file system on you local machine using sshfs<a class="headerlink" href="#mounting-the-file-system-on-you-local-machine-using-sshfs" title="Permalink to this headline">¶</a></h3>
+<p>For linux users:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sshfs</span> <span class="p">[</span><span class="n">user</span><span class="o">@</span><span class="p">]</span><span class="n">carbon</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">metu</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">tr</span><span class="p">:[</span><span class="nb">dir</span><span class="p">]</span> <span class="n">mountpoint</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>eg.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sshfs</span> <span class="n">steinar</span><span class="nd">@carbon</span><span class="o">.</span><span class="n">physics</span><span class="o">.</span><span class="n">metu</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">tr</span><span class="p">:</span>  <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">steinar</span><span class="o">/</span><span class="n">our</span> <span class="n">group</span> <span class="n">cluster</span><span class="o">-</span><span class="n">fs</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>Windows users may buy and install
+<a class="reference external" href="https://www.expandrive.com/windows">expandrive</a>.</p>
+</div>
+<div class="section" id="rsync">
+<h3>rsync<a class="headerlink" href="#rsync" title="Permalink to this headline">¶</a></h3>
+<p>The tool <a class="reference external" href="https://devhints.io/rsync">rsync</a> is also available for transferring files.</p>
+</div>
+</div>
+<div class="section" id="mistake-not-nas-server">
+<h2>Mistake Not… (NAS server)<a class="headerlink" href="#mistake-not-nas-server" title="Permalink to this headline">¶</a></h2>
+<p>Our NAS server offers redundant disks, a trash bin, and cloudstation services. You can reach it via <a class="reference external" href="http://mistake-not.quickconnect.to/">http://mistake-not.quickconnect.to/</a></p>
+<p>The files stored in the NAS are accesible in the carbon under <code class="docutils literal notranslate"><span class="pre">~/mnt/$USER</span></code>. <strong>Warning!</strong> This folder is not accessible to other workstations.</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/storage/file_transfer.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021, obm.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
