@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Transferring files to/from our group cluster" href="file_transfer.html" />
-    <link rel="prev" title="Quantum Espresso" href="../applications/QE/espresso.html" />
+    <link rel="prev" title="About the VASP install on our cluster" href="../applications/VASP/vasp_on_our_clusters.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -86,7 +86,7 @@
 <p class="caption"><span class="caption-text">Resources</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../resources/workstations.html">Workstations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../resources/workstations.html#id1">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../resources/workstations.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../resources/workstations.html#individual-workstation-information">Individual Workstation information</a></li>
 </ul>
 </li>
@@ -189,8 +189,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../applications/sw_guides.html">Application guides</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../applications/VASP/VASP.html">VASP (Vienna Ab initio Simulation Package)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../applications/LAMMPS/LAMMPS.html">Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../applications/QE/espresso.html">Quantum Espresso</a></li>
 </ul>
 </li>
 </ul>
@@ -199,6 +197,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Storage and backup</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#available-file-system">Available file system</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#home-area">Home area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nas-area">NAS area</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#work-scratch-areas">Work/scratch areas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#closing-of-user-account">Closing of user account</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#privacy-of-user-data">Privacy of user data</a></li>
@@ -257,15 +256,18 @@
 <h2>Available file system<a class="headerlink" href="#available-file-system" title="Permalink to this headline">¶</a></h2>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 32%" />
-<col style="width: 16%" />
-<col style="width: 38%" />
-<col style="width: 14%" />
+<col style="width: 26%" />
+<col style="width: 13%" />
+<col style="width: 31%" />
+<col style="width: 11%" />
+<col style="width: 8%" />
+<col style="width: 11%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Mount point</p></th>
 <th class="head"><p>size</p></th>
 <th class="head"><p>redundancies</p></th>
+<th class="head" colspan="2"><p>Accesible by</p></th>
 <th class="head"><p>Erased?</p></th>
 </tr>
 </thead>
@@ -273,21 +275,25 @@
 <tr class="row-even"><td><p>/home, /share, /data</p></td>
 <td><p>4 Tb</p></td>
 <td><p>ZFS mirror</p></td>
+<td colspan="2"><p>Every node</p></td>
 <td><p>No</p></td>
 </tr>
 <tr class="row-odd"><td><p>$HOME/mnt/$USER</p></td>
 <td><p>24 Tb</p></td>
 <td><p>BTRFS mirror, Recycle bin</p></td>
+<td colspan="2"><p>Only headnode</p></td>
 <td><p>No</p></td>
 </tr>
 <tr class="row-even"><td><p>/shared_scratch</p></td>
 <td><p>24 Tb</p></td>
 <td><p>BTRFS mirror</p></td>
+<td colspan="2"><p>Every node</p></td>
 <td><p>Periodic</p></td>
 </tr>
 <tr class="row-odd"><td><p>/scratch /scratch1 ..</p></td>
 <td><p>1 Tb</p></td>
 <td><p>none</p></td>
+<td colspan="2"><p>Only that node</p></td>
 <td><p>Periodic</p></td>
 </tr>
 </tbody>
@@ -304,6 +310,17 @@ NAS mounted <code class="docutils literal notranslate"><span class="pre">$HOME/m
 temporary storage during production runs. Jobs using the home area for scratch
 files while running may be killed without any warning.</p>
 </div>
+<div class="section" id="nas-area">
+<h2>NAS area<a class="headerlink" href="#nas-area" title="Permalink to this headline">¶</a></h2>
+<p>NAS directory gets automatically mounted to <code class="docutils literal notranslate"><span class="pre">$HOME/mnt/$USER</span></code> when you login to headnode.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This directory is only accessible by headnode, and can not be read by other nodes. Copy files
+to <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory, if you want to run jobs</p>
+</div>
+<p>The NAS area is accessible via <a class="reference external" href="http://mistake-not.cz2.quickconnect.to/">web interface</a> using your credentials.
+You can also enable <a class="reference external" href="https://www.synology.com/en-global/dsm/feature/drive">Drive</a> for backing up your personal PCs.</p>
+</div>
 <div class="section" id="work-scratch-areas">
 <h2>Work/scratch areas<a class="headerlink" href="#work-scratch-areas" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
@@ -311,7 +328,13 @@ files while running may be killed without any warning.</p>
 <p>In all scratch areas, auto cleanup affecting all files
 older than 21 days will be implemented.</p>
 </div>
-<p>There is no backup of files stored.</p>
+<p>Each node has a <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> directory equiped with a very fast NVME drive.
+Please use this drive if you are going to write files to the disk, as <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>
+directory can be very slow. This directory is node specific, and can not be accessed
+from headnode or any other node.</p>
+<p>Apart from the node specific <code class="docutils literal notranslate"><span class="pre">/scratch</span></code> there is a <code class="docutils literal notranslate"><span class="pre">/shared_scratch</span></code> directory. This directory
+is available to every node, but it is not yet active.</p>
+<p>There is no backup of files stored in scratches, and they are periodically cleaned.</p>
 </div>
 <div class="section" id="closing-of-user-account">
 <h2>Closing of user account<a class="headerlink" href="#closing-of-user-account" title="Permalink to this headline">¶</a></h2>

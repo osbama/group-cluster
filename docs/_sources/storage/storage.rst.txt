@@ -7,17 +7,17 @@ Available file system
 ---------------------
 
 
-+------------------------+------------+----------------------------+----------+
-| Mount point            | size       | redundancies               | Erased?  |
-+========================+============+============================+==========+
-| /home, /share, /data   | 4 Tb       |  ZFS mirror                | No       |
-+------------------------+------------+----------------------------+----------+
-| $HOME/mnt/$USER        | 24 Tb      |  BTRFS mirror, Recycle bin | No       |
-+------------------------+------------+----------------------------+----------+
-| /shared_scratch        | 24 Tb      |  BTRFS mirror              | Periodic |
-+------------------------+------------+----------------------------+----------+
-| /scratch /scratch1 ..  | 1 Tb       | none                       | Periodic |
-+------------------------+------------+----------------------------+----------+
++------------------------+------------+----------------------------+----------+-------+----------+
+| Mount point            | size       | redundancies               | Accesible by     | Erased?  |
++========================+============+============================+==================+==========+
+| /home, /share, /data   | 4 Tb       |  ZFS mirror                | Every node       | No       |
++------------------------+------------+----------------------------+------------------+----------+
+| $HOME/mnt/$USER        | 24 Tb      |  BTRFS mirror, Recycle bin | Only headnode    | No       |
++------------------------+------------+----------------------------+------------------+----------+
+| /shared_scratch        | 24 Tb      |  BTRFS mirror              | Every node       | Periodic |
++------------------------+------------+----------------------------+------------------+----------+
+| /scratch /scratch1 ..  | 1 Tb       | none                       | Only that node   | Periodic |
++------------------------+------------+----------------------------+------------------+----------+
 
 
 Home area
@@ -33,6 +33,20 @@ The home area is for "permanent" storage only, so please do not use it for
 temporary storage during production runs. Jobs using the home area for scratch
 files while running may be killed without any warning.
 
+NAS area
+---------
+
+NAS directory gets automatically mounted to ``$HOME/mnt/$USER`` when you login to headnode. 
+
+
+.. warning::
+   This directory is only accessible by headnode, and can not be read by other nodes. Copy files 
+   to ``$HOME`` directory, if you want to run jobs
+
+The NAS area is accessible via `web interface <http://mistake-not.cz2.quickconnect.to/>`_ using your credentials. 
+You can also enable `Drive <https://www.synology.com/en-global/dsm/feature/drive>`_ for backing up your personal PCs. 
+
+
 
 Work/scratch areas
 ------------------
@@ -42,10 +56,15 @@ Work/scratch areas
    older than 21 days will be implemented.
 
 
+Each node has a ``/scratch`` directory equiped with a very fast NVME drive. 
+Please use this drive if you are going to write files to the disk, as ``$HOME``
+directory can be very slow. This directory is node specific, and can not be accessed
+from headnode or any other node. 
 
-There is no backup of files stored.
+Apart from the node specific ``/scratch`` there is a ``/shared_scratch`` directory. This directory
+is available to every node, but it is not yet active. 
 
-
+There is no backup of files stored in scratches, and they are periodically cleaned.
 
 
 Closing of user account
