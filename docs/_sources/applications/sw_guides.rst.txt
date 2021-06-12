@@ -13,5 +13,6 @@ the module system, and information about changes in application software see :re
    :titlesonly:
 
    VASP/VASP
+   LAMMPS/LAMMPS
 
 

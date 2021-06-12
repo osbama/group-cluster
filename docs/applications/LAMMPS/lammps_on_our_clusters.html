@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>First time you run a LAMMPS job? &#8212; OBM Group Cluster  documentation</title>
+    <title>About the LAMMPS install on our clusters &#8212; OBM Group Cluster  documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
@@ -19,8 +19,6 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Storage and backup" href="../../storage/storage.html" />
-    <link rel="prev" title="Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS)" href="LAMMPS.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -186,10 +184,10 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../help/AboutLicenses.html">General comments about licenses</a></li>
 </ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../sw_guides.html">Application guides</a><ul class="current">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../sw_guides.html">Application guides</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../VASP/VASP.html">VASP (Vienna Ab initio Simulation Package)</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="LAMMPS.html">Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LAMMPS.html">Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS)</a></li>
 </ul>
 </li>
 </ul>
@@ -251,96 +249,61 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="first-time-you-run-a-lammps-job">
-<span id="first-time-lammps"></span><h1>First time you run a LAMMPS job?<a class="headerlink" href="#first-time-you-run-a-lammps-job" title="Permalink to this headline">¶</a></h1>
-<p>This page contains info aimed at first time
-users of LAMMPS on our clusters, but may also be usefull to
-more experienced users.</p>
-<div class="section" id="lammps-job-script-example">
-<h2>LAMMPS job script example<a class="headerlink" href="#lammps-job-script-example" title="Permalink to this headline">¶</a></h2>
-<p>The job-script as seen here:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash -l
-
-################### LAMMPS Job Batch Script Example ###################
-# Section for defining queue-system variables:
-#-------------------------------------
-# This script asks for Triumphant Coal and 64 cores .  
-# Runtime for this job is 59 minutes; syntax is hh:mm:ss.
-#-------------------------------------
-# SLURM-section
-## Select triumphant-coal
-#SBATCH --partition=triumphant-coal
-## 64 Threads
-#SBATCH --ntasks=64
-##Name of the job
-#SBATCH --job-name=vasp_runex
-##Two ours
-#SBATCH --time=02:00:00
-## asks SLURM to send the USR1 signal 10 minutes before the end of the time limit
-#SBATCH --signal=B:USR1@600
-##Log
-#SBATCH --output=vasp_runex.log
-
-######################################
-# Section for defining job variables and settings:
-
-# We load all the default program system settings with module load:
-
-module --quiet purge
-module load nvhpc/21.3 triumphant-coal/lammps/pgi/git-110621
-# You may check other available versions with &quot;module avail VASP&quot;
-
-
-#Don&#39;t forget to set this to 1, if you do not setup your run for OMP parallelization! 
-export OMP_NUM_THREADS=1
-
-# A unique file tag for the created files
-file_tag=$( date +&quot;%d%m%y-%H%M&quot; )
-
-# Define and create a unique scratch directory for this job
-SCRATCH_DIRECTORY=/scratch/${USER}/${SLURM_JOBID}.$file_tag
-mkdir -p ${SCRATCH_DIRECTORY}
-cd ${SCRATCH_DIRECTORY}
-
-# You can copy everything you need to the scratch directory
-# ${SLURM_SUBMIT_DIR} points to the path where this script was submitted from
-cp ${SLURM_SUBMIT_DIR}/* ${SCRATCH_DIRECTORY}
-
-
-######################################
-# Running the job
-
-
-# define the handler function
-# note that this is not executed here, but rather
-# when the associated signal is sent
-cleanup_function()
-{
-        cd ${SCRATCH_DIRECTORY}
-        echo &quot;function your_cleanup_function called at $(date)&quot;
-        tar cvf ${SLURM_SUBMIT_DIR}/results-${SLURM_JOBID}-$file_tag.tar *
-}
-
-# call cleanup_function once we receive USR1 signal
-trap &#39;cleanup_function&#39; USR1
-
-
-
-echo &quot;starting calculation at $(date)&quot;
-
-# Running the program:
-# the &quot;&amp;&quot; after the compute step and &quot;wait&quot; are important
-mpirun lmp -in _your_input_file_ &amp;
-wait
-
-echo &quot;Job finished at&quot;
-date
-cleanup_function
-################### Job Ended ###################
-exit 0
+  <div class="section" id="about-the-lammps-install-on-our-clusters">
+<span id="lammps-on-our-servers"></span><h1>About the LAMMPS install on our clusters<a class="headerlink" href="#about-the-lammps-install-on-our-clusters" title="Permalink to this headline">¶</a></h1>
+<p>This page contains information related to the installation of LAMMPS on Dilhan. Some of this is relevant also for self-compilation of the code, for those who want to give this a try.</p>
+<div class="section" id="lammps-on-carbon">
+<h2>LAMMPS on Carbon<a class="headerlink" href="#lammps-on-carbon" title="Permalink to this headline">¶</a></h2>
+<p>You will notice numerous LAMMPS modules in Carbon</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module avail lammps
 </pre></div>
 </div>
-<p>Download it here <a class="reference download internal" download="" href="../../_downloads/ffb9e46ab3ee4db887994605a968ed32/job_lammps.sh"><code class="xref download docutils literal notranslate"><span class="pre">job_lammps.sh</span></code></a>.</p>
+<p>The default LAMMPS module, follows the standart <code class="docutils literal notranslate"><span class="pre">cmake</span></code> procedure in the <a class="reference external" href="https://lammps.sandia.gov/doc/Build_cmake.html">LAMMPS manual</a> .</p>
+<p>Loading the <code class="docutils literal notranslate"><span class="pre">miniconda3</span></code> module and source the environment is mandatory in order to use python environment.</p>
+<div class="section" id="compilation-procedure-with-intel-compilers">
+<h3>Compilation procedure with Intel compilers<a class="headerlink" href="#compilation-procedure-with-intel-compilers" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some packages such as <a class="reference external" href="http://gensoft.pasteur.fr/docs/lammps/12Dec2018/Build_extras.html#user-plumed-package">PLUMED</a> and <a class="reference external" href="http://gensoft.pasteur.fr/docs/lammps/12Dec2018/Build_extras.html#mscg-package">MSCG</a> requires GSL.</p>
+<p>You can install GSL to your user using conda</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge gsl
+</pre></div>
+</div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/lammps/lammps.git lammps
+mkdir lammps/build-intel
+<span class="nb">cd</span> lammps/build-intel
+module purge
+module load cmake/3.15.4 compiler/latest mkl/latest openmpi/intel/4.1.1-intel21.2
+module load conda/miniconda3
+<span class="nb">eval</span> <span class="s2">&quot;</span><span class="k">$(</span>/share/apps/miniconda3/bin/conda shell.bash hook<span class="k">)</span><span class="s2">&quot;</span>
+<span class="nv">CC</span><span class="o">=</span>mpicc <span class="nv">CXX</span><span class="o">=</span>mpic++ <span class="nv">FC</span><span class="o">=</span>mpif90 cmake ../cmake -D <span class="nv">BUILD_MPI</span><span class="o">=</span>on -D <span class="nv">BLAS_LIBRARIES</span><span class="o">=</span><span class="s2">&quot;-L</span><span class="si">${</span><span class="nv">MKLROOT</span><span class="si">}</span><span class="s2">/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl&quot;</span> -D <span class="nv">LAPACK_LIBRARIES</span><span class="o">=</span><span class="s2">&quot;-L</span><span class="si">${</span><span class="nv">MKLROOT</span><span class="si">}</span><span class="s2">/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl&quot;</span> -D <span class="nv">PKG_BODY</span><span class="o">=</span>yes -D <span class="nv">PKG_CLASS2</span><span class="o">=</span>yes -D <span class="nv">PKG_DIPOLE</span><span class="o">=</span>yes -D <span class="nv">PKG_MANYBODY</span><span class="o">=</span>yes -D <span class="nv">PKG_MC</span><span class="o">=</span>yes -D <span class="nv">PKG_LATTE</span><span class="o">=</span>yes -D <span class="nv">PKG_MLIAP</span><span class="o">=</span>yes -D <span class="nv">PKG_SNAP</span><span class="o">=</span>yes -D <span class="nv">PKG_SPIN</span><span class="o">=</span>yes -D <span class="nv">PKG_PYTHON</span><span class="o">=</span>yes -D PKG_USER-MOLFILE<span class="o">=</span>yes -D PKG_USER-PHONON<span class="o">=</span>yes -D PKG_USER-REAXC<span class="o">=</span>yes  -D <span class="nv">PKG_KSPACE</span><span class="o">=</span>yes -D PKG_USER-MEAMC<span class="o">=</span>yes -D PKG_USER-PLUMED<span class="o">=</span>yes -D PKG_USER-SMTBQ<span class="o">=</span>yes -D PKG_USER-DIFFRACTION<span class="o">=</span>yes -D <span class="nv">FFT</span><span class="o">=</span>MKL
+make
+</pre></div>
+</div>
+</div>
+<div class="section" id="compilation-procedure-with-pgi-compilers">
+<h3>Compilation procedure with PGI compilers<a class="headerlink" href="#compilation-procedure-with-pgi-compilers" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some packages such as <a class="reference external" href="http://gensoft.pasteur.fr/docs/lammps/12Dec2018/Build_extras.html#user-plumed-package">PLUMED</a> and <a class="reference external" href="http://gensoft.pasteur.fr/docs/lammps/12Dec2018/Build_extras.html#mscg-package">MSCG</a> requires GSL.</p>
+<p>You can install GSL to your user using conda</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge gsl
+</pre></div>
+</div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/lammps/lammps.git lammps
+mkdir lammps/build-intel
+<span class="nb">cd</span> lammps/build-intel
+module purge
+module load cmake/3.15.4 nvhpc/21.3
+module load conda/miniconda3
+<span class="nb">eval</span> <span class="s2">&quot;</span><span class="k">$(</span>/share/apps/miniconda3/bin/conda shell.bash hook<span class="k">)</span><span class="s2">&quot;</span>
+<span class="nv">CC</span><span class="o">=</span>mpicc <span class="nv">CXX</span><span class="o">=</span>mpic++ <span class="nv">FC</span><span class="o">=</span>mpif90 cmake ../cmake -D <span class="nv">BUILD_MPI</span><span class="o">=</span>on -D <span class="nv">BLAS_LIBRARIES</span><span class="o">=</span><span class="s2">&quot;-lblas&quot;</span> -D <span class="nv">LAPACK_LIBRARIES</span><span class="o">=</span><span class="s2">&quot;-llapack&quot;</span> -D <span class="nv">PKG_BODY</span><span class="o">=</span>yes -D <span class="nv">PKG_CLASS2</span><span class="o">=</span>yes -D <span class="nv">PKG_DIPOLE</span><span class="o">=</span>yes -D <span class="nv">PKG_MANYBODY</span><span class="o">=</span>yes -D <span class="nv">PKG_MC</span><span class="o">=</span>yes -D <span class="nv">PKG_LATTE</span><span class="o">=</span>yes -D <span class="nv">PKG_MLIAP</span><span class="o">=</span>yes -D <span class="nv">PKG_SNAP</span><span class="o">=</span>yes -D <span class="nv">PKG_SPIN</span><span class="o">=</span>yes -D <span class="nv">PKG_PYTHON</span><span class="o">=</span>yes -D PKG_USER-MOLFILE<span class="o">=</span>yes -D PKG_USER-PHONON<span class="o">=</span>yes -D PKG_USER-REAXC<span class="o">=</span>yes  -D <span class="nv">PKG_KSPACE</span><span class="o">=</span>yes -D PKG_USER-MEAMC<span class="o">=</span>yes -D PKG_USER-PLUMED<span class="o">=</span>yes -D PKG_USER-SMTBQ<span class="o">=</span>yes -D PKG_USER-DIFFRACTION<span class="o">=</span>yes L
+make
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
@@ -357,7 +320,7 @@ exit 0
         <br/>
         
 <div id="sourcelink">
-  <a href="../../_sources/applications/LAMMPS/firsttime_lammps.rst.txt"
+  <a href="../../_sources/applications/LAMMPS/lammps_on_our_clusters.rst.txt"
      rel="nofollow">Source</a>
 </div>
       
