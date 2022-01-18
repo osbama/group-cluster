@@ -14,5 +14,6 @@ the module system, and information about changes in application software see :re
 
    VASP/VASP
    LAMMPS/LAMMPS
+   Q-E/Q-E
 
 
