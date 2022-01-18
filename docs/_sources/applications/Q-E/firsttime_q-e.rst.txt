@@ -18,13 +18,15 @@ into your test job folder (which I assume you have created in advance).
 Quantum Espresso input example
 ----------------------------------
 
-Download the tarred job :download:`CeO2job-files <../files/CeO2.tar.gz>`.
+Let's do the basic ``pw.x`` example in `Q-E tutorial <http://www.fisica.uniud.it/~giannozz/QE-Tutorial/handson_pwscf.pdf>`_ 
+
+Download the tarred job :download:`handson_pwscf.tar.gz <../files/handson_pwscf.tar.gz>`.
 
 move this file to your test job folder and type
 
 .. code-block:: bash
 
-   tar -zxf CeO2.tar.gz
+   tar -zxf handson_pwscf.tar.gz
 
 Then; download the job-script as seen here:
 

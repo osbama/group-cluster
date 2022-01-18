@@ -264,9 +264,10 @@ commented to provide additional and relevant info.</p>
 into your test job folder (which I assume you have created in advance).</p>
 <section id="quantum-espresso-input-example">
 <h2>Quantum Espresso input example<a class="headerlink" href="#quantum-espresso-input-example" title="Permalink to this headline">¶</a></h2>
-<p>Download the tarred job <a class="reference download internal" download="" href="../../_downloads/f3eb1458da7fff98bfbcf31053297aa2/CeO2.tar.gz"><code class="xref download docutils literal notranslate"><span class="pre">CeO2job-files</span></code></a>.</p>
+<p>Let’s do the basic <code class="docutils literal notranslate"><span class="pre">pw.x</span></code> example in <a class="reference external" href="http://www.fisica.uniud.it/~giannozz/QE-Tutorial/handson_pwscf.pdf">Q-E tutorial</a></p>
+<p>Download the tarred job <a class="reference download internal" download="" href="../../_downloads/949afb96456655651e8853f7f15e8e38/handson_pwscf.tar.gz"><code class="xref download docutils literal notranslate"><span class="pre">handson_pwscf.tar.gz</span></code></a>.</p>
 <p>move this file to your test job folder and type</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar -zxf CeO2.tar.gz
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar -zxf handson_pwscf.tar.gz
 </pre></div>
 </div>
 <p>Then; download the job-script as seen here:</p>
@@ -345,7 +346,7 @@ echo &quot;starting calculation at $(date)&quot;
 
 # Running the program:
 # the &quot;&amp;&quot; after the compute step and &quot;wait&quot; are important
-mpirun pw.x &lt; ${SLURM_SUBMIT_DIR}/in.pw &gt;${SLURM_SUBMIT_DIR}/out.pw &amp;
+mpirun pw.x &lt; ${SLURM_SUBMIT_DIR}/handson_pwscf/Silicon/si.scf.in &gt;${SLURM_SUBMIT_DIR}/handson_pwscf/Silicon/si.scf.out &amp;
 wait
 
 echo &quot;Job finished at&quot;

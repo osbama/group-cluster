@@ -73,7 +73,7 @@ echo "starting calculation at $(date)"
 
 # Running the program:
 # the "&" after the compute step and "wait" are important
-mpirun pw.x < ${SLURM_SUBMIT_DIR}/in.pw >${SLURM_SUBMIT_DIR}/out.pw &
+mpirun pw.x < ${SLURM_SUBMIT_DIR}/handson_pwscf/Silicon/si.scf.in >${SLURM_SUBMIT_DIR}/handson_pwscf/Silicon/si.scf.out &
 wait
 
 echo "Job finished at"
