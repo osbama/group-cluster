@@ -12,7 +12,7 @@ Available file system
 +========================+============+============================+==================+==========+
 | /home, /share, /data   | 4 Tb       |  ZFS mirror                | Every node       | No       |
 +------------------------+------------+----------------------------+------------------+----------+
-| $HOME/mnt/$USER        | 24 Tb      |  BTRFS mirror, Recycle bin | Only headnode    | No       |
+| $HOME/synology/$USER   | 24 Tb      |  BTRFS mirror, Recycle bin | Only headnode    | No       |
 +------------------------+------------+----------------------------+------------------+----------+
 | /shared_scratch        | 24 Tb      |  BTRFS mirror              | Every node       | Periodic |
 +------------------------+------------+----------------------------+------------------+----------+
@@ -36,7 +36,7 @@ files while running may be killed without any warning.
 NAS area
 ---------
 
-NAS directory gets automatically mounted to ``$HOME/mnt/$USER`` when you login to headnode. 
+NAS directory gets automatically mounted to ``$HOME/synology/$USER`` when you login to headnode. 
 
 
 .. warning::
