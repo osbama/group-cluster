@@ -26,10 +26,10 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js "></script>
-<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
-<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js "></script>
-<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
 
   </head><body>
 
@@ -104,6 +104,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../account/login.html">Logging in for the first time</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../account/login.html#first-time-setup">First-time setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../account/login.html#log-in-with-ssh">Log in with SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../account/login.html#obtain-a-new-password">Obtain a new password</a></li>
 </ul>
@@ -189,9 +190,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../applications/sw_guides.html">Application guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../applications/Q-E/Q-E.html">Quantum Espresso</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../applications/VASP/VASP.html">VASP (Vienna Ab initio Simulation Package)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../applications/LAMMPS/LAMMPS.html">Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../applications/Q-E/Q-E.html">Quantum Espresso</a></li>
 </ul>
 </li>
 </ul>
@@ -262,17 +263,17 @@
 </section>
 <section id="connect-to-our-workstations">
 <h2>Connect to our workstations<a class="headerlink" href="#connect-to-our-workstations" title="Permalink to this headline">¶</a></h2>
-<p>You may connect to our group workstations via <em>SSH</em> to <code class="docutils literal notranslate"><span class="pre">carbon.physics.metu.edu.tr</span></code>. This means that on Linux and OSX you may directly connect by opening a terminal and writing <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">username&#64;carbon.physics.metu.edu.tr</span></code>. From Windows, you may connect via PuTTY which is available in the Software Center. X-forwarding for graphical applications is possible. There exists also a webinterface to allow easy graphical file transfer. Please see the following link for details to all mentioned methods. <a class="reference internal" href="../account/login.html"><span class="doc">Logging in for the first time</span></a></p>
+<p>You may connect to our group workstations via <em>SSH</em> to <code class="docutils literal notranslate"><span class="pre">carbon.physics.metu.edu.tr</span></code>. This means that on Linux and OSX you may directly connect by opening a terminal and writing <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">username&#64;carbon.physics.metu.edu.tr</span></code>. From Windows, you may connect via a dedicated application like PuTTY, or using the Windows Subsytem for Linux (WSL) . X-forwarding for graphical applications is possible. There exists also methods to allow easy graphical file transfer. Please see the following link for details to all mentioned methods. <a class="reference internal" href="../account/login.html"><span class="doc">Logging in for the first time</span></a></p>
 </section>
 <section id="on-nodes-and-files">
 <h2>On nodes and files<a class="headerlink" href="#on-nodes-and-files" title="Permalink to this headline">¶</a></h2>
-<p>When you login, you will be on a login node. Do <em>not</em> run any long-lasting programs here. The login node shall only be used for job preparation (see below) and simple file operations.</p>
+<p>When you login, you will be on a login node. Do <em>not</em> run any long-lasting programs here, or you risk your account being banned. The login node shall only be used for job preparation (see below) and simple file operations.</p>
 <p>You will also be in your home directory <code class="docutils literal notranslate"><span class="pre">/home/username</span></code>. This is accessible to all workstations.  This space is <strong>not</strong> backed up. Please remove old files regularly. <a class="reference internal" href="../storage/storage.html"><span class="doc">Storage and backup</span></a></p>
 <p>To move files from your computer to Dilhan or vice versa, you may use any tool that works with <em>ssh</em>. On Linux and OSX, these are scp, rsync, or similar programs. On Windows, you may use WinSCP. <a class="reference internal" href="../storage/file_transfer.html"><span class="doc">Transferring files to/from our group cluster</span></a></p>
 </section>
 <section id="run-a-program">
 <h2>Run a program<a class="headerlink" href="#run-a-program" title="Permalink to this headline">¶</a></h2>
-<p>There are many programs pre-installed. You may get a list of all programs by typing <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">avail</span></code>. You can also search within that list. <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">avail</span> <span class="pre">blast</span></code> will search for Blast (case-insensitive). When you found your program of choice, you may load it using <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">BLAST+/2.7.1-intel-2017b-Python-2.7.14</span></code>. All program files will now be available, i.e. you can now simply call <code class="docutils literal notranslate"><span class="pre">blastp</span> <span class="pre">-version</span></code> to run Blast and check the loaded version. You can also compile your own software, if necessary. <a class="reference internal" href="../software/modules.html"><span class="doc">Software Module Scheme</span></a></p>
+<p>There are many programs pre-installed. You may get a list of all programs by typing <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">avail</span></code>. You can also search within that list. <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">avail</span> <span class="pre">Q-E</span></code> will search for Quantum Espresso (case-insensitive). When you found your program of choice, you may load it using <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">forever-diamond/Q-E/nvhpc/git280822-nvhpc22.7</span></code>. All program files will now be available in your path, i.e. you can now simply call <code class="docutils literal notranslate"><span class="pre">pw.x</span></code> to run Quantum Espresso PW. You can also compile your own software, if necessary. <a class="reference internal" href="../software/modules.html"><span class="doc">Software Module Scheme</span></a></p>
 <p>To eventually run the program, you have to write a job script. In this script, you can define how long the job (i.e. the program) will run and how much memory and compute cores it needs. For the actual computation, you need to learn at least the basics of Linux shell scripting. You can learn some basics here: <a class="reference internal" href="linux.html"><span class="doc">Linux command line</span></a>.</p>
 <p>When you wrote the job script, you can start it with <code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">jobscript.sh</span></code>. This will put the script in the queue, where it will wait until an appropriate compute node is available. You can see the status of your job with <code class="docutils literal notranslate"><span class="pre">squeue</span> <span class="pre">-u</span> <span class="pre">username</span></code>. <a class="reference internal" href="../jobs/batch.html"><span class="doc">Batch system</span></a> and <a class="reference internal" href="../jobs/examples.html"><span class="doc">Job script examples</span></a></p>
 <p>Every job that gets started will be charged to your quota. Your quota is calculated in hours of CPU time and is connected to your specific project.</p>
@@ -300,7 +301,7 @@
     </p>
     <p>
         &copy; Copyright 2021, obm.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0.<br/>
     </p>
   </div>
 </footer>

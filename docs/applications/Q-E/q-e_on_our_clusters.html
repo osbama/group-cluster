@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>About the Quantum Espresso install on our cluster &#8212; OBM Group Cluster  documentation</title>
+    <title>Quantum Espresso in our cluster &#8212; OBM Group Cluster  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
@@ -20,16 +20,16 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Storage and backup" href="../../storage/storage.html" />
+    <link rel="next" title="VASP (Vienna Ab initio Simulation Package)" href="../VASP/VASP.html" />
     <link rel="prev" title="First time you run a Quantum Espresso job?" href="firsttime_q-e.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js "></script>
-<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
-<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js "></script>
-<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
 
   </head><body>
 
@@ -104,6 +104,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../account/login.html">Logging in for the first time</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../account/login.html#first-time-setup">First-time setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../account/login.html#log-in-with-ssh">Log in with SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../account/login.html#obtain-a-new-password">Obtain a new password</a></li>
 </ul>
@@ -189,9 +190,9 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../sw_guides.html">Application guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="Q-E.html">Quantum Espresso</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../VASP/VASP.html">VASP (Vienna Ab initio Simulation Package)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../LAMMPS/LAMMPS.html">Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS)</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="Q-E.html">Quantum Espresso</a></li>
 </ul>
 </li>
 </ul>
@@ -253,8 +254,8 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <section id="about-the-quantum-espresso-install-on-our-cluster">
-<span id="q-e-on-our-cluster"></span><h1>About the Quantum Espresso install on our cluster<a class="headerlink" href="#about-the-quantum-espresso-install-on-our-cluster" title="Permalink to this headline">¶</a></h1>
+  <section id="quantum-espresso-in-our-cluster">
+<span id="q-e-on-our-cluster"></span><h1>Quantum Espresso in our cluster<a class="headerlink" href="#quantum-espresso-in-our-cluster" title="Permalink to this headline">¶</a></h1>
 <p>This page contains information related to the installation of Quantum Espresso on our group cluster. Some of this is relevant also for self-compilation of the code, for those who want to give this a try.</p>
 <section id="quantum-espresso-on-our-group-cluster">
 <h2>Quantum Espresso on our group cluster<a class="headerlink" href="#quantum-espresso-on-our-group-cluster" title="Permalink to this headline">¶</a></h2>
@@ -266,6 +267,129 @@
 <p>on our group cluster, you will notice that, there are a number of available vasp modules. This might appear confusing.</p>
 <p>First; each module is optimised for a particular workstation. For example <code class="docutils literal notranslate"><span class="pre">JRTI/Q-E/nvhpc-21.3/7.0</span></code> is optimized for
 <a class="reference internal" href="../../resources/Just-Read-The-Instructions.html#about-jrti"><span class="std std-ref">Just Read The Instructions</span></a>. Second, <code class="docutils literal notranslate"><span class="pre">nvhpc</span></code> indicates it is compiled with Nvidia HPC compilers. Third <code class="docutils literal notranslate"><span class="pre">7.0</span></code> is the version of Quantum Espresso, and <code class="docutils literal notranslate"><span class="pre">openACC</span></code> indicates it is compiled with openACC accellaration (with GPUs).  All versions of Quantum Espresso is compiled with the support for maximally-localised Wannier functions and the Wannier90 program and also the MPI flag in FPP (-DMPI)</p>
+</section>
+<section id="quantum-espresso-best-practices-using-gpus">
+<h2>Quantum Espresso Best Practices using GPUs<a class="headerlink" href="#quantum-espresso-best-practices-using-gpus" title="Permalink to this headline">¶</a></h2>
+<p>Please read the <a class="reference external" href="http://www.max-centre.eu/webinar/how-use-quantum-espresso-new-gpu-based-hpc-systems">MAX webinar on how to use Quantum Espresso on new GPU based HPC systems</a></p>
+<p>The presentation slides are available <a class="reference external" href="../files/QE_on_gpu.pdf'">also here</a></p>
+<p>Some highlights:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>1MPI process perGPU,</strong></p></li>
+<li><p>CPU cores can (must!) be exploited with OpenMP parallelism</p></li>
+<li><p>Pool parallelism is very effective, but requires memory</p></li>
+<li><p>The dense eigenvalue problem is solved on 1 GPU, use the serial eigensolver.</p></li>
+<li><p>Check the Wiki, it’s updated with a collaborative effort!</p></li>
+<li><p>More details: P. Giannozzi et al. J. Chem. Phys. 152, 154105 (2020)</p></li>
+</ul>
+</div></blockquote>
+<p>In carbon, GPU enabled Q-E installs use NVHPC compilers.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash -l
+
+################### Quantum Espresso Job Batch Script Example ###################
+# Section for defining queue-system variables:
+#-------------------------------------
+# This script asks for Just Read The Instructions and 64 cores .
+# Runtime for this job is 59 minutes; syntax is hh:mm:ss.
+#-------------------------------------
+# SLURM-section
+## Select Just Read The Instructions
+#SBATCH --partition=JRTI
+## Reserve the node for the GPU
+#SBATCH --ntasks=96
+##Name of the job
+#SBATCH --job-name=q-e_ex-gpu
+##one hour
+#SBATCH --time=01:00:00
+## asks SLURM to send the USR1 signal 10 minutes before the end of the time limit
+#SBATCH --signal=B:USR1@600
+##The name of the log file (you can see the progress of your job here)
+#SBATCH --output=q-e_ex-gpu.log
+
+###########################################################
+# This section is for defining job variables and settings
+# that needs to be defined before running the job
+###########################################################
+
+#name of the input file
+input_file=&quot;in.qe-example-pw&quot;
+#name of the output file
+output_file=&quot;out.qe-example-pw&quot;
+
+# For the efficient use of GPU/CPU hybrid use a K point parallelization, and openMP threads
+qe_executable=&quot;pw.x -npool 1 -ndiag 1 -ntg 1 -inp &quot;
+export OMP_NUM_THREADS=64
+
+# We load all the default program system settings with module load:
+
+module --quiet purge
+module load nvhpc/22.7 JRTI/Q-E/nvhpc/git280822-nvhpc22.7-gpu
+# You may check other available versions with &quot;module avail q-e&quot;
+
+
+# A unique file tag for the created files
+file_tag=$( date +&quot;%d%m%y-%H%M&quot; )
+
+# Define and create a unique local scratch directory for this job. Remember, this will
+# make your job run  much faster!
+SCRATCH_DIRECTORY=/scratch/${USER}/${SLURM_JOBID}.$file_tag
+mkdir -p ${SCRATCH_DIRECTORY}
+cd ${SCRATCH_DIRECTORY}
+
+# You can copy everything you need to the scratch directory
+# ${SLURM_SUBMIT_DIR} points to the path where this script was submitted from
+rsync -arp ${SLURM_SUBMIT_DIR}/ .
+
+
+#############################################################################
+# This section is about collecting the results from the local scratch back to
+# where the job was run. Make sure that you have enough quota, if you want to
+# collect the wave functions as well!
+#############################################################################
+
+
+# define the handler function
+# note that this is not executed here, but rather
+# when the associated signal is sent
+cleanup_function()
+{
+        cd ${SCRATCH_DIRECTORY}
+        echo &quot;function cleanup_function called at $(date)&quot;
+        tar cvf results-${SLURM_JOBID}-$file_tag.tar *
+        gzip  results-${SLURM_JOBID}-$file_tag.tar
+        du -sh results-${SLURM_JOBID}-$file_tag.tar.gz
+        mv results-${SLURM_JOBID}-$file_tag.tar.gz ${SLURM_SUBMIT_DIR}
+}
+
+# call cleanup_function once we receive USR1 signal
+trap &#39;cleanup_function&#39; USR1
+
+###############################################################################
+# This section actually runs the job. It needs to be after the previous two
+# sections
+#################################################################################
+
+echo &quot;starting calculation at $(date)&quot;
+
+# First, let&#39;s go to the local scratch directory
+cd ${SCRATCH_DIRECTORY}
+
+# Running the program:
+# the &quot;&amp;&quot; after the compute step and &quot;wait&quot; are important for the cleanup process
+# the &quot;tee&quot; is used to mirror the output to the slurm output, so that you can follow
+# the job progress more easily
+run_line=&quot;mpirun -np 1 ${qe_executable} ${input_file} |tee ${output_file} &amp;&quot;
+echo $run_line
+eval $run_line
+wait
+
+echo &quot;Job finished at&quot;
+date
+cleanup_function
+################### Job Ended ###################
+exit 0
+</pre></div>
+</div>
 </section>
 <section id="about-memory-allocation-for-quantum-espresso">
 <h2>About memory allocation for Quantum Espresso<a class="headerlink" href="#about-memory-allocation-for-quantum-espresso" title="Permalink to this headline">¶</a></h2>
@@ -296,7 +420,7 @@
     </p>
     <p>
         &copy; Copyright 2021, obm.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0.<br/>
     </p>
   </div>
 </footer>

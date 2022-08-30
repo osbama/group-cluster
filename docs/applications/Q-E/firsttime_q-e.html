@@ -20,16 +20,16 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="About the Quantum Espresso install on our cluster" href="q-e_on_our_clusters.html" />
+    <link rel="next" title="Quantum Espresso in our cluster" href="q-e_on_our_clusters.html" />
     <link rel="prev" title="Quantum Espresso" href="Q-E.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js "></script>
-<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
-<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js "></script>
-<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
 
   </head><body>
 
@@ -104,6 +104,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../account/login.html">Logging in for the first time</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../account/login.html#first-time-setup">First-time setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../account/login.html#log-in-with-ssh">Log in with SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../account/login.html#obtain-a-new-password">Obtain a new password</a></li>
 </ul>
@@ -189,9 +190,9 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../sw_guides.html">Application guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="Q-E.html">Quantum Espresso</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../VASP/VASP.html">VASP (Vienna Ab initio Simulation Package)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../LAMMPS/LAMMPS.html">Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS)</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="Q-E.html">Quantum Espresso</a></li>
 </ul>
 </li>
 </ul>
@@ -262,68 +263,113 @@ provided examples. Also note that the job-script example is rather richly
 commented to provide additional and relevant info.</p>
 <p>If you want to run this testjob, download the copies of the scripts and put them
 into your test job folder (which I assume you have created in advance).</p>
-<section id="quantum-espresso-input-example">
-<h2>Quantum Espresso input example<a class="headerlink" href="#quantum-espresso-input-example" title="Permalink to this headline">¶</a></h2>
-<p>Let’s do the basic <code class="docutils literal notranslate"><span class="pre">pw.x</span></code> example in <a class="reference external" href="http://www.fisica.uniud.it/~giannozz/QE-Tutorial/handson_pwscf.pdf">Q-E tutorial</a></p>
+<section id="quantum-espresso-tutorial">
+<h2>Quantum Espresso Tutorial<a class="headerlink" href="#quantum-espresso-tutorial" title="Permalink to this headline">¶</a></h2>
+<p>Let’s do the basics of <code class="docutils literal notranslate"><span class="pre">pw.x</span></code> in the
+<a class="reference external" href="http://www.fisica.uniud.it/~giannozz/QE-Tutorial/handson_pwscf.pdf">Q-E tutorial</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is better you do the tutorial in your own PC, since they are very “light”
+calculations, and you will not need to wait for resources. You can easily install
+Quantum Espresso to your own pc using <a class="reference external" href="https://anaconda.org/conda-forge/qe">Anaconda</a>
+by</p>
+<p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">qe</span></code></p>
+</div>
 <p>Download the tarred job <a class="reference download internal" download="" href="../../_downloads/949afb96456655651e8853f7f15e8e38/handson_pwscf.tar.gz"><code class="xref download docutils literal notranslate"><span class="pre">handson_pwscf.tar.gz</span></code></a>.</p>
 <p>move this file to your test job folder and type</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar -zxf handson_pwscf.tar.gz
 </pre></div>
 </div>
-<p>Then; download the job-script as seen here:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash -l
-
-################### Quantum Espresso Job Batch Script Example ###################
+<p>The instructions you need to follow are in <cite>handson_pwscf.pdf</cite>. These examples
+are designed to be run interactively. If you want to do this in our cluster,
+you need to reserve yourself an interactive job <a class="reference internal" href="../../jobs/interactive.html#interactive"><span class="std std-ref">Interactive jobs</span></a></p>
+</section>
+<section id="quantum-espresso-production-test-job">
+<h2>Quantum Espresso Production Test Job<a class="headerlink" href="#quantum-espresso-production-test-job" title="Permalink to this headline">¶</a></h2>
+<p>In this example, we will run one of the basic Quantum Espresso examples</p>
+<p>Download the tarred job <a class="reference download internal" download="" href="../../_downloads/4bcafcef845ca349cddc91f4b6d9b93e/qe-example-job.tar.gz"><code class="xref download docutils literal notranslate"><span class="pre">qe-example-job.tar.gz</span></code></a>.</p>
+<p>This is a simple <code class="docutils literal notranslate"><span class="pre">pw.x</span></code> run for the Silicon. It should run very fast and minimal resources</p>
+<p>Upload this to your home directory, and untar the file</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar -zxf qe-example-job.tar.gz
+<span class="nb">cd</span> qe-example-job
+</pre></div>
+</div>
+<p>Please inspect the <code class="docutils literal notranslate"><span class="pre">pw.x</span></code> input file to see the structure. The pseudopotential
+is already included in this example in the <cite>pseudo</cite> directory. However, you are
+encouraged to check out the <a class="reference external" href="https://www.materialscloud.org/discover/sssp/table/efficiency">Standart Solid State PPs</a>
+In Carbon, <cite>pslibrary</cite> pseudo potentials can be reached from <cite>/share/apps/pslibrary1.0.0</cite></p>
+<p>Next, you need to create a job script in this directory. You can use the example
+script here <a class="reference download internal" download="" href="../../_downloads/8b2705548da7e28b947de677c102de76/job_q-e.sh"><code class="xref download docutils literal notranslate"><span class="pre">job_q-e.sh</span></code></a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sbatch job_q-e.sh
+</pre></div>
+</div>
+<p>This script will ask for shared 4 cpus in <a class="reference internal" href="../../resources/Triumphant-Coal.html#about-triumphant-coal"><span class="std std-ref">Triumphant Coal</span></a>. Copy the files
+in the example directory to the local scratch (which is much much faster), and finaly
+copy the results back to where it was launched in a <cite>.tar.gz</cite> archive.</p>
+<p>Feel free to modify the job script for your needs.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>################### Quantum Espresso Job Batch Script Example ###################
 # Section for defining queue-system variables:
 #-------------------------------------
-# This script asks for Triumphant Coal and 64 cores .  
+# This script asks for Triumphant Coal and 4 cores .
 # Runtime for this job is 59 minutes; syntax is hh:mm:ss.
 #-------------------------------------
 # SLURM-section
-## Select Just Read The Instructions
-#SBATCH --partition=JRTI
-## 64 Threads
-#SBATCH --ntasks=64
+## Select Triumphant Coal workstation
+#SBATCH --partition=triumphant-coal
+## 4 jobs
+#SBATCH --ntasks=4
 ##Name of the job
 #SBATCH --job-name=q-e_ex
-##Two hours
-#SBATCH --time=02:00:00
+##one hour
+#SBATCH --time=00:59:00
+##Ask/Allow sharing the node
+#SBATCH --oversubscribe
 ## asks SLURM to send the USR1 signal 10 minutes before the end of the time limit
 #SBATCH --signal=B:USR1@600
-##Log
+##The name of the log file (you can see the progress of your job here)
 #SBATCH --output=q-e_ex.log
 
-######################################
-# Section for defining job variables and settings:
+###########################################################
+# This section is for defining job variables and settings
+# that needs to be defined before running the job
+###########################################################
+
+#name of the input file
+input_file=&quot;in.qe-example-pw&quot;
+#name of the output file
+output_file=&quot;out.qe-example-pw&quot;
+#name of the executable
+qe_executable=&quot;pw.x&quot;
 
 # We load all the default program system settings with module load:
 
 module --quiet purge
-module load nvhpc/21.3 JRTI/Q-E/nvhpc-21.3/7.0
+module load compiler/latest mkl/latest mpi/latest triumphant-coal/Q-E/oneapi/git280822-oneapi21.2
 # You may check other available versions with &quot;module avail q-e&quot;
 
 
-#Don&#39;t forget to set this to 1, if you do not setup your run for OMP parallelization! 
+#Don&#39;t forget to set this to 1, if you do not setup your run for OMP parallelization!
 export OMP_NUM_THREADS=1
 
 # A unique file tag for the created files
 file_tag=$( date +&quot;%d%m%y-%H%M&quot; )
 
-# Define and create a unique scratch directory for this job
+# Define and create a unique local scratch directory for this job. Remember, this will
+# make your job run  much faster!
 SCRATCH_DIRECTORY=/scratch/${USER}/${SLURM_JOBID}.$file_tag
 mkdir -p ${SCRATCH_DIRECTORY}
 cd ${SCRATCH_DIRECTORY}
 
 # You can copy everything you need to the scratch directory
 # ${SLURM_SUBMIT_DIR} points to the path where this script was submitted from
-cp ${SLURM_SUBMIT_DIR}/ ${SCRATCH_DIRECTORY}
-cp ${SLURM_SUBMIT_DIR}/POSCAR ${SCRATCH_DIRECTORY}
-cp ${SLURM_SUBMIT_DIR}/POTCAR ${SCRATCH_DIRECTORY}
-cp ${SLURM_SUBMIT_DIR}/KPOINTS ${SCRATCH_DIRECTORY}
+rsync -arp ${SLURM_SUBMIT_DIR}/ .
 
 
-######################################
-# Running the job
+#############################################################################
+# This section is about collecting the results from the local scratch back to
+# where the job was run. Make sure that you have enough quota, if you want to
+# collect the wave functions as well!
+#############################################################################
 
 
 # define the handler function
@@ -332,21 +378,33 @@ cp ${SLURM_SUBMIT_DIR}/KPOINTS ${SCRATCH_DIRECTORY}
 cleanup_function()
 {
         cd ${SCRATCH_DIRECTORY}
-        echo &quot;function your_cleanup_function called at $(date)&quot;
-        tar cvf ${SLURM_SUBMIT_DIR}/results-${SLURM_JOBID}-$file_tag.tar *
-        gzip  ${SLURM_SUBMIT_DIR}/results-${SLURM_JOBID}-$file_tag.tar 
+        echo &quot;function cleanup_function called at $(date)&quot;
+        tar cvf results-${SLURM_JOBID}-$file_tag.tar *
+        gzip  results-${SLURM_JOBID}-$file_tag.tar
+        du -sh results-${SLURM_JOBID}-$file_tag.tar.gz
+        mv results-${SLURM_JOBID}-$file_tag.tar.gz ${SLURM_SUBMIT_DIR}
 }
 
 # call cleanup_function once we receive USR1 signal
 trap &#39;cleanup_function&#39; USR1
 
-
+###############################################################################
+# This section actually runs the job. It needs to be after the previous two
+# sections
+#################################################################################
 
 echo &quot;starting calculation at $(date)&quot;
 
+# First, let&#39;s go to the local scratch directory
+cd ${SCRATCH_DIRECTORY}
+
 # Running the program:
-# the &quot;&amp;&quot; after the compute step and &quot;wait&quot; are important
-mpirun pw.x &lt; ${SLURM_SUBMIT_DIR}/handson_pwscf/Silicon/si.scf.in &gt;${SLURM_SUBMIT_DIR}/handson_pwscf/Silicon/si.scf.out &amp;
+# the &quot;&amp;&quot; after the compute step and &quot;wait&quot; are important for the cleanup process
+# the &quot;tee&quot; is used to mirror the output to the slurm output, so that you can follow
+# the job progress more easily
+run_line=&quot;mpirun ${qe_executable} &lt; ${input_file} |tee ${output_file} &amp;&quot;
+echo $run_line
+eval $run_line
 wait
 
 echo &quot;Job finished at&quot;
@@ -356,7 +414,7 @@ cleanup_function
 exit 0
 </pre></div>
 </div>
-<p>Download it here <a class="reference download internal" download="" href="../../_downloads/8b2705548da7e28b947de677c102de76/job_q-e.sh"><code class="xref download docutils literal notranslate"><span class="pre">job_q-e.sh</span></code></a>.</p>
+<p>See <a class="reference internal" href="q-e_on_our_clusters.html#q-e-on-our-cluster"><span class="std std-ref">Quantum Espresso in our cluster</span></a> for further details, tips and tricks.</p>
 </section>
 </section>
 
@@ -380,7 +438,7 @@ exit 0
     </p>
     <p>
         &copy; Copyright 2021, obm.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0.<br/>
     </p>
   </div>
 </footer>

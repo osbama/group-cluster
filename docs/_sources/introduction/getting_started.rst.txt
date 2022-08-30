@@ -16,12 +16,12 @@ If you are elligible for an account, you may apply locally. :doc:`/account/accou
 Connect to our workstations
 -----------------
 
-You may connect to our group workstations via *SSH* to ``carbon.physics.metu.edu.tr``. This means that on Linux and OSX you may directly connect by opening a terminal and writing ``ssh username@carbon.physics.metu.edu.tr``. From Windows, you may connect via PuTTY which is available in the Software Center. X-forwarding for graphical applications is possible. There exists also a webinterface to allow easy graphical file transfer. Please see the following link for details to all mentioned methods. :doc:`/account/login`
+You may connect to our group workstations via *SSH* to ``carbon.physics.metu.edu.tr``. This means that on Linux and OSX you may directly connect by opening a terminal and writing ``ssh username@carbon.physics.metu.edu.tr``. From Windows, you may connect via a dedicated application like PuTTY, or using the Windows Subsytem for Linux (WSL) . X-forwarding for graphical applications is possible. There exists also methods to allow easy graphical file transfer. Please see the following link for details to all mentioned methods. :doc:`/account/login`
 
 On nodes and files
 ------------------
 
-When you login, you will be on a login node. Do *not* run any long-lasting programs here. The login node shall only be used for job preparation (see below) and simple file operations.
+When you login, you will be on a login node. Do *not* run any long-lasting programs here, or you risk your account being banned. The login node shall only be used for job preparation (see below) and simple file operations.
 
 You will also be in your home directory ``/home/username``. This is accessible to all workstations.  This space is **not** backed up. Please remove old files regularly. :doc:`/storage/storage`
 
@@ -30,7 +30,7 @@ To move files from your computer to Dilhan or vice versa, you may use any tool t
 Run a program
 -------------
 
-There are many programs pre-installed. You may get a list of all programs by typing ``module avail``. You can also search within that list. ``module avail blast`` will search for Blast (case-insensitive). When you found your program of choice, you may load it using ``module load BLAST+/2.7.1-intel-2017b-Python-2.7.14``. All program files will now be available, i.e. you can now simply call ``blastp -version`` to run Blast and check the loaded version. You can also compile your own software, if necessary. :doc:`/software/modules`
+There are many programs pre-installed. You may get a list of all programs by typing ``module avail``. You can also search within that list. ``module avail Q-E`` will search for Quantum Espresso (case-insensitive). When you found your program of choice, you may load it using ``module load forever-diamond/Q-E/nvhpc/git280822-nvhpc22.7``. All program files will now be available in your path, i.e. you can now simply call ``pw.x`` to run Quantum Espresso PW. You can also compile your own software, if necessary. :doc:`/software/modules`
 
 To eventually run the program, you have to write a job script. In this script, you can define how long the job (i.e. the program) will run and how much memory and compute cores it needs. For the actual computation, you need to learn at least the basics of Linux shell scripting. You can learn some basics here: :doc:`/introduction/linux`.
 

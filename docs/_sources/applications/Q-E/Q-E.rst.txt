@@ -1,10 +1,10 @@
 .. _q-e:
 
 ==========================================
-Quantum Espresso 
+Quantum Espresso
 ==========================================
 
-Information regarding the Quantum Espresso installed on our clusters. 
+Information regarding the Quantum Espresso installed on our clusters.
 
 
 
@@ -38,29 +38,3 @@ Citation
 ---------
 
 When publishing results obtained with the referred software referred, please do check the developers web page in order to find the correct citation(s).
-
-Usage
-=====
-
-You load the application by typing:
-
-.. code-block:: bash
-
-    $ module load JRTI/Q-E/nvhpc-21.3/7.0
-
-This command will give you the default version.
-
-For more information on available versions, type:
-
-.. code-block:: bash
-
-    $ module avail q-e
-
-Experiencewise, Quantum Espresso is a rather memory intensive code. Users are advised to read up on the general job script example(s) for SLURM, and also how to specify memory in `SLURM <https://slurm.schedmd.com>`_.
-
-
-About the Quantum Espresso version(s) installed on Our Cluster
----------------------------------------------------------------------
-
-See :ref:`q-e_on_our_cluster`.
-
