@@ -12,8 +12,6 @@ the module system, and information about changes in application software see :re
    :maxdepth: 2
    :titlesonly:
 
+   Q-E/Q-E
    VASP/VASP
    LAMMPS/LAMMPS
-   Q-E/Q-E
-
-

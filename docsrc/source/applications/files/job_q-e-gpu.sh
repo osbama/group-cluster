@@ -1,24 +1,24 @@
+#!/bin/bash -l
+
 ################### Quantum Espresso Job Batch Script Example ###################
 # Section for defining queue-system variables:
 #-------------------------------------
-# This script asks for Triumphant Coal and 4 cores .
+# This script asks for Just Read The Instructions and 64 cores .
 # Runtime for this job is 59 minutes; syntax is hh:mm:ss.
 #-------------------------------------
 # SLURM-section
-## Select Triumphant Coal workstation
-#SBATCH --partition=triumphant-coal
-## 4 jobs
-#SBATCH --ntasks=4
+## Select Just Read The Instructions
+#SBATCH --partition=JRTI
+## Reserve the node for the GPU
+#SBATCH --ntasks=96
 ##Name of the job
-#SBATCH --job-name=q-e_ex
+#SBATCH --job-name=q-e_ex-gpu
 ##one hour
-#SBATCH --time=00:59:00
-##Ask/Allow sharing the node
-#SBATCH --oversubscribe
+#SBATCH --time=01:00:00
 ## asks SLURM to send the USR1 signal 10 minutes before the end of the time limit
 #SBATCH --signal=B:USR1@600
 ##The name of the log file (you can see the progress of your job here)
-#SBATCH --output=q-e_ex.log
+#SBATCH --output=q-e_ex-gpu.log
 
 ###########################################################
 # This section is for defining job variables and settings
@@ -29,18 +29,17 @@
 input_file="in.qe-example-pw"
 #name of the output file
 output_file="out.qe-example-pw"
-#name of the executable
-qe_executable="pw.x"
+
+# For the efficient use of GPU/CPU hybrid use a K point parallelization, and openMP threads
+qe_executable="pw.x -npool 1 -ndiag 1 -ntg 1 -inp "
+export OMP_NUM_THREADS=64
 
 # We load all the default program system settings with module load:
 
 module --quiet purge
-module load compiler/latest mkl/latest mpi/latest triumphant-coal/Q-E/oneapi/git280822-oneapi21.2
+module load nvhpc/22.7 JRTI/Q-E/nvhpc/git280822-nvhpc22.7-gpu
 # You may check other available versions with "module avail q-e"
 
-
-#Don't forget to set this to 1, if you do not setup your run for OMP parallelization!
-export OMP_NUM_THREADS=1
 
 # A unique file tag for the created files
 file_tag=$( date +"%d%m%y-%H%M" )
@@ -93,7 +92,7 @@ cd ${SCRATCH_DIRECTORY}
 # the "&" after the compute step and "wait" are important for the cleanup process
 # the "tee" is used to mirror the output to the slurm output, so that you can follow
 # the job progress more easily
-run_line="mpirun ${qe_executable} < ${input_file} |tee ${output_file} &"
+run_line="mpirun -np 1 ${qe_executable} ${input_file} |tee ${output_file} &"
 echo $run_line
 eval $run_line
 wait
